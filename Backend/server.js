@@ -4,7 +4,7 @@ var app = express();
 const port = 5000;
 
 //runs python script on GET request 
-app.get('/', (req, res) => {
+app.post('/fetchURI', (req, res) => {
  
 	var dataToSend;
 	// spawn new child process to call the python script
@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 	});
  
 })
+
 app.use(bodyParser.json());
 app.use(
 	bodyParser.urlencoded({
@@ -33,4 +34,4 @@ app.use(
 
 app.listen(port);
  
-logger.info("Server.js listening on port: " + port);
+console.log("Server.js listening on port: " + port);
