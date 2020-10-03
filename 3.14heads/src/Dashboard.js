@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
                 <PageHeader id='PageHeader'/>
 
                 <div id='PageBody'>
-                    <Row style={{ height: '100%'}}>
+                    <Row style={{ height: '100%', width: '100%', margin: '0'}}>
                         <Col sm={8} style={{ border: 'solid', height: '100%'}}>
 
                         </Col>
