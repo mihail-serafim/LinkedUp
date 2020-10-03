@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import PageHeader from './Components/PageHeader';
 import PageFooter from './Components/PageFooter';
+import RightDashboard from './Components/RightDashboard';
 
 class Dashboard extends React.Component {
 
@@ -24,7 +25,7 @@ class Dashboard extends React.Component {
 
                         </Col>
                         <Col sm={4} style={{ border: 'solid', height: '100%'}}>
-
+                            <RightDashboard />
                         </Col>
                     </Row>
 
