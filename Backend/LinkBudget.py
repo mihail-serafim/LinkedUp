@@ -38,15 +38,26 @@ class LinkBudget():
                 "frequency" : 10, #GHz(must be between 6 and 12)
                 "relays" : 2
             },
-            "tx" : {
-                "tx_out_db" : 15, #dB
+            "e_m_tx" : {
+                "tx_out_w" : 100, 
+                "efficiency" : 12,
                 "tx_gain" : 10 #dB
             },
-            "rx" : {
+            "e_m_rx" : {
                 "eff_diameter" : 1, # OUTPUT - metres
                 "pointing_error" : 0.5, #degrees
                 "rx_gain" : 50 #dB
             },
+            "m_e_tx" : {
+                "tx_out_w" : 100, 
+                "efficiency" : 12,
+                "tx_gain" : 10 #dB
+            },
+            "m_e_rx" : {
+                "eff_diameter" : 1, # OUTPUT - metres
+                "pointing_error" : 0.5, #degrees
+                "rx_gain" : 50 #dB
+            }
         }
     
     def mars_atm(self):
@@ -116,13 +127,13 @@ class LinkBudget():
         except KeyError as error:
             raise error
 
-    def rx_pointing_loss(self, frequency, rx_gain):
+    def rx_pointing_loss(self, frequency, rx_gain, direction):
         wavelength = frequency / c
         eff_diameter = math.sqrt(10*(rx_gain/10)/0.75)*wavelength/math.pi
 
         half_power_beamwidth = 70*wavelength/eff_diameter
 
-        self.params["rx"]["eff_diameter"] = eff_diameter
+        self.params["%s_rx"%direction]["eff_diameter"] = eff_diameter
         
         return(12 * (eff_diameter/half_power_beamwidth)**2)
 
@@ -199,15 +210,19 @@ class LinkBudget():
 
         return(fspl + cloud_fade + rain_fade + earth_gas_losses + mars_gas_losses)
 
-    def evaluate(self):
+    def evaluate(self, direction):
 
         year = self.params["time"]["year"]
         month = self.params["time"]["month"]
         day = self.params["time"]["day"]
         distance = self.dist_mars(year, month, day)
-        tx_out_db = self.params["tx"]["tx_out_db"]
-        tx_gain = self.params["tx"]["tx_gain"]
-        rx_gain = self.params["rx"]["rx_gain"]
+        tx_out_w = self.params["%s_tx"%direction]["tx_out_w"]
+        efficiency = self.params["%s_tx"%direction]["efficiency"]
+
+        tx_out_db = 10*math.log(tx_out_w * efficiency)
+
+        tx_gain = self.params["%s_tx"%direction]["tx_gain"]
+        rx_gain = self.params["%s_rx"%direction]["rx_gain"]
 
         bitrate = self.params["data"]["nominal_bitrate"]
         ber = self.params["data"]["ber"]
@@ -232,7 +247,7 @@ class LinkBudget():
         #print("Isotropic Power: ", carry_through)
         carry_through += rx_gain
         #print("asdf: ", carry_through)
-        carry_through -= self.rx_pointing_loss(frequency, rx_gain) #received signal power
+        carry_through -= self.rx_pointing_loss(frequency, rx_gain, direction) #received signal power
         #print("Signal Power: ", carry_through)
 
         carry_through -= self.evaluate_noise_power(rx_nf) #received CNR
@@ -250,5 +265,6 @@ class LinkBudget():
         return(margin, bitrate_eff, time_elapsed, distance)
 
 lb = LinkBudget()
-print("%s %s %s %s" %(lb.evaluate()))
+print("%s %s %s %s" %(lb.evaluate("e_m")))
+print("%s %s %s %s" %(lb.evaluate("m_e")))
 #print(lb.evaluate_link_margin())
