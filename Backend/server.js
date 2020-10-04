@@ -4,7 +4,7 @@ var app = express();
 const port = 5000;
 
 //runs python script on GET request 
-app.post('/fetchURI', (req, res) => {
+app.post('/updateParameters', (req, res) => {
  
 	var dataToSend;
 	// spawn new child process to call the python script
