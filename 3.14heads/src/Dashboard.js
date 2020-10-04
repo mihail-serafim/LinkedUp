@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
 
     updateParameters = async() => {
         console.log('parameters button')
-        let results = await updateParametersEndpoint();
+        let results = await updateParametersEndpoint(this.state);
         console.log(results)
         this.setState({
             linkMarginEM: results.linkMarginEM,
@@ -171,6 +171,7 @@ var defaultFormValues = {
 // Endpoints
 async function updateParametersEndpoint(state) {
     let userJSON = state;
+    console.log(userJSON);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
