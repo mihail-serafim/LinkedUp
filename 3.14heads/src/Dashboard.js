@@ -123,10 +123,10 @@ class Dashboard extends React.Component {
 
                 <div id='PageBody'>
                     <Row style={{ height: '100%', width: '100%', margin: '0'}}>
-                        <Col sm={8} style={{ border: 'solid', height: '100%'}}>
+                        <Col sm={8}>
                             <SpaceMap numberOfRelays={4 /* Set state, connect to right screen */}/>
                         </Col>
-                        <Col sm={4} style={{ border: 'solid', height: '100%'}}>
+                        <Col sm={4}>
                             <RightDashboard 
                             linkMarginEM={this.state.linkMarginEM}
                             linkMarginME={this.state.linkMarginME}
@@ -160,7 +160,7 @@ class Dashboard extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={8} style={{ border: 'solid', height: '100%'}}>
+                        <Col sm={8} className="mx-3 my-2">
                         {/* message board */}
                             <Message 
                                 message="" 
@@ -172,7 +172,7 @@ class Dashboard extends React.Component {
 
                 </div>
 
-                <PageFooter id='PageFooter' />
+                {/* TODO: add back -> <PageFooter id='PageFooter' /> */} 
             </div>
         );
     }

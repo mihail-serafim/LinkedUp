@@ -4,7 +4,10 @@ import { Row, Form, Button, Card } from 'react-bootstrap';
 function Response({ message }) {
     // should add some animation for changing letter or something
     return (
-        <Card>
+        <Card
+            bg='dark'
+            text='white'
+        >
             <Card.Body>
                 <Form>
                     <Form.Group controlId='message'>
