@@ -21,8 +21,8 @@ class LinkBudget():
                 "day": self.date[2]
             },
             "noise" : {
-                "e_m_rx_nf": j.get("noiseFigureE",6), #dB
-                "m_e_rx_nf": j.get("noiseFigureM",6)
+                "e_m_rx_nf": float(j.get("noiseFigureE",6)), #dB
+                "m_e_rx_nf": float(j.get("noiseFigureM",6))
             },
             "data" : {
                 "framing_data_per_packet" : 8, #bytes
@@ -46,29 +46,29 @@ class LinkBudget():
                 "clouds" : 0 #yes/no
             },
             "carrier" : {
-                "bandwidth" : j.get("frequency",0.02), #GHz 
-                "frequency" : j.get("frequency",10), #GHz(must be between 6 and 12)
+                "bandwidth" : float(j.get("frequency",0.02)), #GHz 
+                "frequency" : float(j.get("frequency",10)), #GHz(must be between 6 and 12)
                 "relays" : 2
             },
             "e_m_tx" : {
-                "tx_out_w" : j.get("transmitterPowerE",100), 
-                "efficiency" : j.get("transmitterEffE",12),
-                "tx_gain" : j.get("transmitterGainM",10) #dB
+                "tx_out_w" : float(j.get("transmitterPowerE",100)), 
+                "efficiency" : float(j.get("transmitterEffE",12)),
+                "tx_gain" : float(j.get("transmitterGainM",10)) #dB
             },
             "e_m_rx" : {
                 "eff_diameter" : 1, # OUTPUT - metres
-                "pointing_error" : j.get("pointingErrorE",0.5), #degrees
-                "rx_gain" : j.get("receiverGainE",50) #dB
+                "pointing_error" : float(j.get("pointingErrorE",0.5)), #degrees
+                "rx_gain" : float(j.get("receiverGainE",50)) #dB
             },
             "m_e_tx" : {
-                "tx_out_w" : j.get("transmitterPowerW",100), 
-                "efficiency" : j.get("transmitterEffM",12),
-                "tx_gain" : j.get("transmitterGainE", 10) #dB
+                "tx_out_w" : float(j.get("transmitterPowerW",100)), 
+                "efficiency" : float(j.get("transmitterEffM",12)),
+                "tx_gain" : float(j.get("transmitterGainE", 10)) #dB
             },
             "m_e_rx" : {
                 "eff_diameter" : 1, # OUTPUT - metres
-                "pointing_error" : j.get("pointingErrorM",0.5), #degrees
-                "rx_gain" : j.get("receiverGainM",50) #dB
+                "pointing_error" : float(j.get("pointingErrorM",0.5)), #degrees
+                "rx_gain" : float(j.get("receiverGainM",50)) #dB
             }
         }
     
