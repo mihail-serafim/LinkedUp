@@ -249,8 +249,6 @@ class RightDashboard extends React.Component {
                     </div>
                 </Tab>
             </Tabs>
-
-            <Button variant="success" className="float-right" onClick={() => this.props.updateParameters()} style={{ marginTop: '25px' }}>Update Parameters</Button>
             </Card.Body>
             </Card>
         );

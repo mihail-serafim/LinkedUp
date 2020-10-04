@@ -5,7 +5,7 @@ const port = 5000;
 
 //runs python script on post request 
 app.post('/api/v1/updateParameters', (req, res) => {
-	
+	console.log('Request body');
 	var dataToSend;
 	
 	// spawn new child process to call the python script
@@ -24,13 +24,17 @@ app.post('/api/v1/updateParameters', (req, res) => {
 	var vals = dataToSend.split(' ');
 	var obj = new Object();
 
-	obj.link = vals[0];
-	obj.rate = vals[1];
-	obj.time = vals[2];
+	obj.linkMarginEM = vals[0];
+	obj.linkMarginME = vals[1];
+	obj.effBitRateEM = vals[2];
+	obj.effBitRateME = vals[3];
+	obj.messageTimeEM = vals[4];
+	obj.messageTimeME = vals[5];
+	obj.distance = vals[6];
 	//obj.dist = vals[3];
 
 	var jsonString = JSON.stringify(obj);
-	// send JSON object to browser
+	// send JSON object to browser {'':'',
 	res.send(JSON.parse(jsonString));
 	});
  

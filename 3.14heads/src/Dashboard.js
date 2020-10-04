@@ -94,13 +94,13 @@ class Dashboard extends React.Component {
         console.log('parameters button')
         let results = await updateParametersEndpoint();
         this.setState({
-            linkMarginEM: null,
-            linkMarginME: null,
-            effBitRateEM: null,
-            effBitRateME: null,
-            messageTimeEM: null,
-            messageTimeME: null,
-            distance: null  
+            linkMarginEM: results.linkMarginEM,
+            linkMarginME: results.linkMarginMe,
+            effBitRateEM: results.effBitRateEM,
+            effBitRateME: results.effBitRateME,
+            messageTimeEM: results.messageTimeEM,
+            messageTimeME: results.messageTimeME,
+            distance: results.distance  
         })
     }
 
