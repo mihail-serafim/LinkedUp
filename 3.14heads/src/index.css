@@ -45,5 +45,5 @@ code {
 a { color: inherit !important; } 
 
 .card {
-  border: none;
+  border: none !important;
 }
