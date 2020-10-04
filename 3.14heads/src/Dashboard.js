@@ -110,15 +110,7 @@ class Dashboard extends React.Component {
             [event.target.id]: event.target.value
         })
     }
-
-    updateNumber = (event) => {
-        console.log({[event.target.id]: event.target.value})
-        this.setState({
-            [event.target.id]: event.target.value
-        })
-    }
-
-
+    
     render() {
 
         return (
@@ -128,34 +120,20 @@ class Dashboard extends React.Component {
                 <div id='PageBody'>
                     <Row style={{ height: '100%', width: '100%', margin: '0'}}>
                         <Col sm={8}>
-                            <SpaceMap numberOfRelays={this.state.numberRelays}/>
+                            <Row>
+                                <SpaceMap numberOfRelays={this.state.numberRelays}/>
+                            </Row>
+                            <Row>
+                                <Message 
+                                    message="" 
+                                    updateMessage={(event) => console.log(event.target.value)} 
+                                    submitMessage={() => console.log('sumbitted')}
+                                />
+                            </Row>
                         </Col>
                         <Col sm={4}>
                             <RightDashboard 
-                            linkMarginEM={this.state.linkMarginEM}
-                            linkMarginME={this.state.linkMarginME}
-                            effBitRateEM={this.state.effBitRateEM}
-                            effBitRateME={this.state.effBitRateME}
-                            messageTimeEM={this.state.messageTimeEM}
-                            messageTimeME={this.state.messageTimeME}
-                            distance={this.state.distance}
-                            location={this.state.location}
-                            date={this.state.date}
-                            numberRelays={this.state.numberRelays}
-                            frequency={this.state.frequency}
-                            bandwidth={this.state.bandwidth}
-                            transmitterPowerE={this.state.transmitterPowerE}
-                            transmitterPowerM={this.state.transmitterPowerM}
-                            transmitterEffE={this.state.transmitterEffE}
-                            transmitterEffM={this.state.transmitterEffM}
-                            transmitterGainE={this.state.transmitterGainE}
-                            transmitterGainM={this.state.transmitterGainM}
-                            receiverGainE={this.state.receiverGainE}
-                            receiverGainM={this.state.receiverGainM}
-                            pointingErrorE={this.state.pointingErrorE}
-                            pointingErrorM={this.state.pointingErrorM}
-                            noiseFigureE={this.state.noiseFigureE}
-                            noiseFigureM={this.state.noiseFigureM}
+                            {...this.state}
                             updateParameters={this.updateParameters} 
                             updateLocation={this.updateLocation}  
                             updateNumberRelays={this.updateNumberRelays}
@@ -167,16 +145,7 @@ class Dashboard extends React.Component {
                             />
                         </Col>
                     </Row>
-                    <Row>
-                        <Col sm={8} className="mx-3 my-2">
-                        {/* message board */}
-                            <Message 
-                                message="" 
-                                updateMessage={(event) => console.log(event.target.value)} 
-                                submitMessage={() => console.log('sumbitted')}
-                            />
-                        </Col>
-                    </Row>
+
 
                 </div>
 

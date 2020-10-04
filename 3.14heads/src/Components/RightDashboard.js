@@ -223,7 +223,7 @@ class RightDashboard extends React.Component {
 
             <Button variant="success" className="float-right" onClick={() => this.props.updateParameters()} style={{ marginTop: '10px' }}>Update Simulation Parameters</Button>
              
-            <Tabs defaultActiveKey="Results" id="uncontrolled-tab-example" style={{ marginTop: '10px'}}>
+            <Tabs defaultActiveKey="Results" id="uncontrolled-tab-example" className="mt-5 pt-5 pl-3 pb-3" >
                 <Tab eventKey="Results" title='Results' style={{ padding: '5px', marginBottom: '10px'}}>
                   <div style={{ height: '30vh', overflow: 'scroll'}}>
                     <u><b>Earth-to-Mars</b></u>

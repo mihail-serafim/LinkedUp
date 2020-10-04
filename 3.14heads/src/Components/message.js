@@ -7,6 +7,7 @@ function Message({ message, updateMessage, submitMessage }) {
         <Card
             bg='dark'
             text='white'
+            style={{ width: '100%' }}
         >
             <Card.Body>
                 <Card.Title className="ml-2 mt-3">Message To Mars</Card.Title>
