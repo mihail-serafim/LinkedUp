@@ -4,6 +4,7 @@ import getweather
 import numpy
 import sys
 from constants import *
+from skyfield.api import load
 
 class LinkBudget():
     def __init__(self, params_from_site):
@@ -12,13 +13,13 @@ class LinkBudget():
         self.location = j.get("location", "Toronto, Canada")
         weather = getweather.getweather(self.location)
 
-        self.date = j.get("date","2020-10-01").strip("-")
+        self.date = (j.get("date","2020-10-01")).split("-")
 
         self.params = {
             "time" : { # TODO - implement from json
-                "year": self.date[0],
-                "month": self.date[1],
-                "day": self.date[2]
+                "year": int(self.date[0]),
+                "month": int(self.date[1]),
+                "day": int(self.date[2])
             },
             "noise" : {
                 "e_m_rx_nf": float(j.get("noiseFigureE",6)), #dB
@@ -83,14 +84,10 @@ class LinkBudget():
 
         return sum(pressures)/len(pressures) #average pressure, in Pa 
 
-    def dist_mars(year, month, day, hour=0, minute=0):
-        try:
-            from skyfield.api import load
-        except ModuleNotFoundError:
-            return(600)
+    def dist_mars(self, year, month, day):
         data   = load('de421.bsp')
         ts     = load.timescale()
-        t      = ts.utc(year, month, day, hour, minute) #(year,month,day,hour,minute,second)
+        t      = ts.utc(year, month, day, 0, 0) #(year,month,day,hour,minute,second)
 
         mars, earth  = data['Mars barycenter'], data['Earth']
         mpos, epos      = mars.at(t).position.km, earth.at(t).position.km
@@ -190,7 +187,6 @@ class LinkBudget():
         year = self.params["time"]["year"]
         month = self.params["time"]["month"]
         day = self.params["time"]["day"]
-        distance = self.dist_mars(year, month, day)
         frequency = self.params["carrier"]["frequency"]
         clouds = self.params["earth_air"]["clouds"]
         rain = self.params["earth_air"]["rain"]
@@ -199,7 +195,7 @@ class LinkBudget():
         pressure = self.params["earth_air"]["pressure"]
         relays = self.params["carrier"]["relays"]
 
-        distance = self.dist_mars(2000, 12, 1)
+        distance = self.dist_mars(year, month, day)
         fspl = self.fspl(distance, frequency, relays)
         #print("fspl: ",fspl)
         cloud_fade = self.cloud_fade(clouds)
