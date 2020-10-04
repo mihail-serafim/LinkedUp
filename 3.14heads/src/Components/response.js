@@ -15,9 +15,10 @@ function Response(props) {
             className="reverse mb-3"
         >
             <Card.Body>
-            <Card.Title className="mt-3 mb-3">Response from Mars</Card.Title>
+            <Card.Title className="mt-3 mb-3">Results </Card.Title>
 
             <div id='style-14' style={{ height: '30vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+                    <h5>Mars-to-Earth</h5>
                     <Row>
                         <Col>
                             <p><b>Link Margin:</b></p>
@@ -32,7 +33,7 @@ function Response(props) {
                             <p>{distance}</p>
                         </Col>
                     </Row>
-                    <u><b>Mars-to-Earth</b></u>
+                    <h5>Mars-to-Earth</h5>
                     <Row>
                         <Col>
                             <p><b>Link Margin:</b></p>
