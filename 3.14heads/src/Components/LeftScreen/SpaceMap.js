@@ -1,53 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap'
-import spacemap from '../../assets/spacemap.png'
 
-var sectionStyle = {
+import spacemap0 from '../../assets/spacemap0.png'
+import spacemap1 from '../../assets/spacemap1.png'
+import spacemap2 from '../../assets/spacemap2.png'
+import spacemap3 from '../../assets/spacemap3.png'
+import spacemap4 from '../../assets/spacemap4.png'
+
+var sectionStyle = (picture) => ({
     width: '100%',
     height: '100%',
-    backgroundImage: `url(${spacemap})`,
+    backgroundImage: `url(${picture})`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
-  };
+  });
 
-// Turn this function in the one that hold relays
-function Sometext({ heightRatio, children }) {
-    return <><div style={{ height: `${heightRatio * 60 + 15}%` }}>
-    </div>
-    <div className="text-white text-center">{children}</div></>
-}
 
 function SpaceMap(props) {
     const { numberOfRelays } = props
-    
-    // narrows down col to needed ones
-    let activeCols
-    if (numberOfRelays == 1) {
-        activeCols = [1]
-    } else if (numberOfRelays == 2) {
-        activeCols = [1, 2]
-    } else if (numberOfRelays == 3) {
-        activeCols = [0, 1, 2]
-    } else if (numberOfRelays >= 4) { // capping number of cols at 4
-        activeCols = [0, 1, 2, 3]
+
+    // remove bottom two blocks and use number of relays instead of Val
+    const [val, setVal] = useState(0)
+    const incrementVal = () => {
+        if (val == 4) {
+            setVal(0)
+        } else {
+            setVal((val) => val + 1)
+        }
     }
     
-    const coloumns = [1, 2, 3, 4].map((v,i) => // making all the middle cols
-    <Col sm={2} style={{ height: '100%' }}>
-        {activeCols.includes(i) && <Sometext heightRatio={(4 - (i + 1))/4} key={i}>
-            Blah
-        </Sometext>}
-    </Col>)
+    let pictures = [spacemap0, spacemap1, spacemap2, spacemap3, spacemap4]
+    let picture = pictures[val] // replace with numberOfRelays
 
     return (
-        <section style={ sectionStyle }>
-            <Row style={{ height: '100%' }}>
-                <Col sm={2}></Col>
-                    {coloumns}
-                <Col sm={2}></Col>
+        <>
+            <Row style={{ height: '640px' }}>
+                <section style={ sectionStyle(picture) }>
+                    <button onClick={() => incrementVal()}>Increment</button>
+                </section>
             </Row>
-        </section>
-      );
+            <div style={{ width: 0}}> {/* Code just for loading pics and no render flash */}
+                {pictures.map((picture) => <section style={ sectionStyle(picture) }></section>)}
+            </div>
+        </>
+    );
 }
 
 export { SpaceMap }
