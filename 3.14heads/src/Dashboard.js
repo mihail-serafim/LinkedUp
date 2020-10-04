@@ -12,31 +12,14 @@ class Dashboard extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          location: 'Toronto, Canada',
-          date: null,
-          numberRelays: 0,
-          frequency: null,
-          bandwidth: null,
-          reqBitRate: null,
-          transmitterPowerE: null,
-          transmitterPowerM: null,
-          transmitterEffE: null,
-          transmitterEffM: null,
-          transmitterGainE: null,
-          transmitterGainM: null,
-          receiverGainE: null,
-          receiverGainM: null,
-          pointingErrorE: null,
-          pointingErrorM: null,
-          noiseFigureE: null,
-          noiseFigureM: null,
-          linkMarginEM: 'N/A',
-          linkMarginME: 'N/A',
-          effBitRateEM: 'N/A',
-          effBitRateME: 'N/A',
-          messageTimeEM: 'N/A',
-          messageTimeME: 'N/A',
-          distance: 'N/A'
+        ...defaultFormValues,
+        linkMarginEM: 'N/A',
+        linkMarginME: 'N/A',
+        effBitRateEM: 'N/A',
+        effBitRateME: 'N/A',
+        messageTimeEM: 'N/A',
+        messageTimeME: 'N/A',
+        distance: 'N/A'
       };
     }
     
@@ -111,8 +94,15 @@ class Dashboard extends React.Component {
         })
     }
 
-    render() {
+    resetFormFields = () => {
+        Object.keys(defaultFormValues).map((key) => {
+            this.setState({
+                [key]: defaultFormValues[key]
+            })
+        })
+    }
 
+    render() {
         return (
             <div id='DashboardContent'>
                 <PageHeader id='PageHeader'/>
@@ -131,7 +121,8 @@ class Dashboard extends React.Component {
                                 updateBandwidth={this.updateBandwidth}
                                 updateReqBitRate={this.updateReqBitRate} 
                                 updateTransmitterPowerE={this.updateTransmitterPowerE} 
-                                updateText={this.updateText}                       
+                                updateText={this.updateText}
+                                resetFormFields={this.resetFormFields}                
                             />
                         </Col>
                     </Row>
@@ -153,6 +144,27 @@ class Dashboard extends React.Component {
             </div>
         );
     }
+}
+
+var defaultFormValues = {
+    location: 'Toronto, Canada',
+    date: '',
+    numberRelays: 0,
+    frequency: '',
+    bandwidth: '',
+    reqBitRate: '',
+    transmitterPowerE: '',
+    transmitterPowerM: '',
+    transmitterEffE: '',
+    transmitterEffM: '',
+    transmitterGainE: '',
+    transmitterGainM: '',
+    receiverGainE: '',
+    receiverGainM: '',
+    pointingErrorE: '',
+    pointingErrorM: '',
+    noiseFigureE: '',
+    noiseFigureM: '',
 }
 
 // Endpoints

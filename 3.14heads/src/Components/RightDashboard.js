@@ -249,6 +249,7 @@ class RightDashboard extends React.Component {
                     </div>
                 </Tab>
             </Tabs>
+            <Button variant="danger" className="mt-4 mr-2 float-right" onClick={this.props.resetFormFields}>Reset Parameters</Button>
             </Card.Body>
             </Card>
         );
