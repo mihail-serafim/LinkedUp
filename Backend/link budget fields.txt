@@ -1,0 +1,26 @@
+Transmitter
+- Transmitter Output Power
+- Transmitter Efficiency
+- Transmitter Antenna Gain
+
+Receiver
+- Receiver Antenna Gain (dB)
+- Pointing Error (degrees)
+- Receiver Noise Figure (dB)
+
+Carrier Wave
+- Frequency (GHz)
+- Bandwidth (GHz)
+
+Date (truncate if necessary)
+- Year
+- Month
+- Day
+- Hour
+- Minute
+
+Data
+- Required bitrate (bits/second)
+
+Modulation (Advanced)
+- Modulation Scheme
