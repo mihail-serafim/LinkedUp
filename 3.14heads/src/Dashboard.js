@@ -17,9 +17,22 @@ class Dashboard extends React.Component {
           numberRelays: 0,
           frequency: null,
           bandwidth: null,
-          transmitterPower: null,
-
-
+          reqBitRate: null,
+          transmitterPowerE: null,
+          transmitterPowerM: null,
+          transmitterEffE: null,
+          transmitterEffM: null,
+          transmitterGainE: null,
+          transmitterGainM: null,
+          receiverGainE: null,
+          receiverGainM: null,
+          linkMarginEM: 'N/A',
+          linkMarginME: 'N/A',
+          effBitRateEM: 'N/A',
+          effBitRateME: 'N/A',
+          messageTimeEM: 'N/A',
+          messageTimeME: 'N/A',
+          distance: 'N/A'
       };
     }
     
@@ -52,10 +65,17 @@ class Dashboard extends React.Component {
         })
     }
 
-    updateTransmitterPower = (power) => {
+    updateReqBitRate = (reqBitRate) => {
+        console.log(reqBitRate)
+        this.setState({
+            reqBitRate: reqBitRate
+        })
+    }
+
+    updateTransmitterPowerE = (power) => {
         console.log(power)
         this.setState({
-            transmitterPower: power
+            transmitterPowerE: power
         })
     }
 
@@ -67,7 +87,31 @@ class Dashboard extends React.Component {
     }
 
     updateParameters = async() => {
+        console.log('parameters button')
         let results = await updateParametersEndpoint();
+        this.setState({
+            linkMarginEM: null,
+            linkMarginME: null,
+            effBitRateEM: null,
+            effBitRateME: null,
+            messageTimeEM: null,
+            messageTimeME: null,
+            distance: null  
+        })
+    }
+
+    updateText = (event) => {
+        console.log({[event.target.id]: event.target.value})
+        this.setState({
+            [event.target.id]: event.target.value
+        })
+    }
+
+    updateNumber = (event) => {
+        console.log({[event.target.id]: event.target.value})
+        this.setState({
+            [event.target.id]: event.target.value
+        })
     }
 
 
@@ -84,33 +128,44 @@ class Dashboard extends React.Component {
                         </Col>
                         <Col sm={4} style={{ border: 'solid', height: '100%'}}>
                             <RightDashboard 
+                            linkMarginEM={this.state.linkMarginEM}
+                            linkMarginME={this.state.linkMarginME}
+                            effBitRateEM={this.state.effBitRateEM}
+                            effBitRateME={this.state.effBitRateME}
+                            messageTimeEM={this.state.messageTimeEM}
+                            messageTimeME={this.state.messageTimeME}
+                            distance={this.state.distance}
                             location={this.state.location}
                             date={this.state.date}
                             numberRelays={this.state.numberRelays}
                             frequency={this.state.frequency}
                             bandwidth={this.state.bandwidth}
-                            transmitterPower={this.state.transmitterPower} 
-                            updateLocation={this.updateLocation}
-                            updateDate={this.updateDate}   
+                            transmitterPowerE={this.state.transmitterPowerE}
+                            transmitterPowerM={this.state.transmitterPowerM}
+                            transmitterEffE={this.state.transmitterEffE}
+                            transmitterEffM={this.state.transmitterEffM}
+                            transmitterGainE={this.state.transmitterGainE}
+                            transmitterGainM={this.state.transmitterGainM}
+                            receiverGainE={this.state.receiverGainE}
+                            receiverGainM={this.state.receiverGainM}
+                            updateParameters={this.updateParameters} 
+                            updateLocation={this.updateLocation}  
                             updateNumberRelays={this.updateNumberRelays}
                             updateFrequency={this.updateFrequency}
                             updateBandwidth={this.updateBandwidth}
-                            updateTransmitterPower={this.updateTransmitterPower}                        
+                            updateReqBitRate={this.updateReqBitRate} 
+                            updateTransmitterPowerE={this.updateTransmitterPowerE} 
+                            updateText={this.updateText}                       
                             />
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={6} style={{ border: 'solid', height: '100%'}}>
+                        <Col sm={8} style={{ border: 'solid', height: '100%'}}>
                         {/* message board */}
                             <Message 
                                 message="" 
                                 updateMessage={(event) => console.log(event.target.value)} 
                                 submitMessage={() => console.log('sumbitted')}
-                            />
-                        </Col>
-                        <Col sm={6} style={{ border: 'solid', height: '100%'}}>
-                            <Response
-                                message="blah"
                             />
                         </Col>
                     </Row>
