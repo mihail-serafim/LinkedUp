@@ -110,7 +110,7 @@ class Dashboard extends React.Component {
             [event.target.id]: event.target.value
         })
     }
-    
+
     render() {
 
         return (
@@ -120,33 +120,34 @@ class Dashboard extends React.Component {
                 <div id='PageBody'>
                     <Row style={{ height: '100%', width: '100%', margin: '0'}}>
                         <Col sm={8}>
-                            <Row>
-                                <SpaceMap numberOfRelays={this.state.numberRelays}/>
-                            </Row>
-                            <Row>
-                                <Message 
-                                    message="" 
-                                    updateMessage={(event) => console.log(event.target.value)} 
-                                    submitMessage={() => console.log('sumbitted')}
-                                />
-                            </Row>
+                            <SpaceMap numberOfRelays={this.state.numberRelays}/>
                         </Col>
                         <Col sm={4}>
                             <RightDashboard 
-                            {...this.state}
-                            updateParameters={this.updateParameters} 
-                            updateLocation={this.updateLocation}  
-                            updateNumberRelays={this.updateNumberRelays}
-                            updateFrequency={this.updateFrequency}
-                            updateBandwidth={this.updateBandwidth}
-                            updateReqBitRate={this.updateReqBitRate} 
-                            updateTransmitterPowerE={this.updateTransmitterPowerE} 
-                            updateText={this.updateText}                       
+                                {...this.state}
+                                updateParameters={this.updateParameters} 
+                                updateLocation={this.updateLocation}  
+                                updateNumberRelays={this.updateNumberRelays}
+                                updateFrequency={this.updateFrequency}
+                                updateBandwidth={this.updateBandwidth}
+                                updateReqBitRate={this.updateReqBitRate} 
+                                updateTransmitterPowerE={this.updateTransmitterPowerE} 
+                                updateText={this.updateText}                       
                             />
                         </Col>
                     </Row>
-
-
+                    <Row>
+                        <Col sm={8}>
+                            <Message 
+                                message="" 
+                                updateMessage={(event) => console.log(event.target.value)} 
+                                submitMessage={() => console.log('sumbitted')}
+                            />
+                        </Col>
+                        <Col>
+                            <Response />
+                        </Col>
+                    </Row>
                 </div>
 
                 {/* TODO: add back -> <PageFooter id='PageFooter' /> */} 

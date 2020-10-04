@@ -21,7 +21,7 @@ class RightDashboard extends React.Component {
             <Card.Body>
             <Tabs defaultActiveKey="Parameters" id="uncontrolled-tab-example" className="my-3 ml-1">
                 <Tab eventKey="Parameters" title='Parameters' style={{ padding: '5px'}}>
-                <div style={{ height: '70vh', overflow: 'scroll'}}>
+                <div style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden' }}>
                     <b>Basic</b>
                     <Row>
                         <Col>
@@ -114,7 +114,7 @@ class RightDashboard extends React.Component {
                 </Tab>
 
                 <Tab eventKey="Advanced Params" title="Advanced Params" >
-                <div style={{ height: '70vh', overflow: 'scroll'}}>
+                <div style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden' }}>
                 <b>Earth</b>
                 <Row>
                     <Col>
@@ -222,43 +222,6 @@ class RightDashboard extends React.Component {
             </Tabs>
 
             <Button variant="success" className="float-right" onClick={() => this.props.updateParameters()} style={{ marginTop: '10px' }}>Update Simulation Parameters</Button>
-             
-            <Tabs defaultActiveKey="Results" id="uncontrolled-tab-example" className="mt-5 pt-5 pl-3 pb-3" >
-                <Tab eventKey="Results" title='Results' style={{ padding: '5px', marginBottom: '10px'}}>
-                  <div style={{ height: '30vh', overflow: 'scroll'}}>
-                    <u><b>Earth-to-Mars</b></u>
-                    <Row>
-                        <Col>
-                            <p><b>Link Margin:</b></p>
-                            <p>{this.state.linkMarginEM} dB</p>
-                            <p><b>Time till Received:</b></p>
-                            <p>{this.state.messageTimeEM} min</p>
-                        </Col>
-                        <Col>
-                            <p><b>Effective Bit Rate:</b></p>
-                            <p>{this.state.effBitRateEM} bps</p>  
-                            <p><b>Distance:</b></p>
-                            <p>{this.state.distance}</p>
-                        </Col>
-                    </Row>
-                    <u><b>Mars-to-Earth</b></u>
-                    <Row>
-                        <Col>
-                            <p><b>Link Margin:</b></p>
-                            <p>{this.state.linkMarginME} dB</p>
-                            <p><b>Time till Received:</b></p>
-                            <p>{this.state.messageTimeME} min</p>
-                        </Col>
-                        <Col>
-                            <p><b>Effective Bit Rate:</b></p>  
-                            <p>{this.state.effBitRateME} bps</p>
-                            <p><b>Distance:</b></p>
-                            <p>{this.state.distance} km</p>
-                        </Col>     
-                    </Row>
-                    </div>
-                </Tab>
-            </Tabs>
             </Card.Body>
             </Card>
         );
