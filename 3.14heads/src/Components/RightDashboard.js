@@ -17,6 +17,7 @@ class RightDashboard extends React.Component {
             <div>
             <Tabs defaultActiveKey="Parameters" id="uncontrolled-tab-example" style={{ backgroundColor: 'white', marginTop: '10px'}}>
                 <Tab eventKey="Parameters" title='Parameters' style={{ backgroundColor: 'white', padding: '5px'}}>
+                    <div style={{ height: '70vh', overflow: 'scroll'}}>
                     <b>Basic</b>
                     <Row>
                         <Col>
@@ -105,9 +106,11 @@ class RightDashboard extends React.Component {
                             </Form.Group>
                         </Col>
                     </Row>
+                    </div>
                 </Tab>
 
                 <Tab eventKey="Advanced Params" title="Advanced Params" style={{ backgroundColor: 'white', padding: '5px'}}>
+                <div style={{ height: '70vh', overflow: 'scroll'}}>
                 <b>Earth</b>
                 <Row>
                     <Col>
@@ -137,21 +140,21 @@ class RightDashboard extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group controlId="Pointing Error">
+                        <Form.Group controlId="pointingErrorE">
                             <Form.Label>Pointing Error</Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
-                                        value={this.state.power} 
-                                        onChange={this.updatePower}/>degrees
+                                        value={this.props.pointingErrorE} 
+                                        onChange={this.props.updateText}/>degrees
                         </Form.Group>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <Form.Group controlId="Noise Figure">
+                        <Form.Group controlId="noiseFigureE">
                             <Form.Label>Noise Figure</Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
-                                        value={this.state.TransmitterPower} 
-                                        onChange={this.updateTransmitterPower}/>
+                                        value={this.props.noiseFigureE} 
+                                        onChange={this.props.updateText}/>
                         </Form.Group>
                     </Col>
                     <Col>
@@ -186,26 +189,27 @@ class RightDashboard extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col>
-                        <Form.Group controlId="Pointing Error">
+                        <Form.Group controlId="pointingErrorM">
                             <Form.Label>Pointing Error</Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
-                                        value={this.state.power} 
-                                        onChange={this.updatePower}/>degrees
+                                        value={this.props.pointingErroM} 
+                                        onChange={this.props.updateText}/>degrees
                         </Form.Group>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <Form.Group controlId="Noise Figure">
+                        <Form.Group controlId="noiseFigureM">
                             <Form.Label>Noise Figure</Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
-                                        value={this.state.TransmitterPower} 
-                                        onChange={this.updateTransmitterPower}/>
+                                        value={this.props.noiseFigureM} 
+                                        onChange={this.props.updateText}/>
                         </Form.Group>
                     </Col>
                     <Col>
                     </Col>
                 </Row>
+                </div>
                 </Tab>
 
                 <Tab eventKey="Help" title="Help/How-to" style={{ backgroundColor: 'white'}}>
@@ -217,6 +221,7 @@ class RightDashboard extends React.Component {
              
             <Tabs defaultActiveKey="Results" id="uncontrolled-tab-example" style={{ backgroundColor: 'white', marginTop: '10px'}}>
                 <Tab eventKey="Results" title='Results' style={{ backgroundColor: 'white', padding: '5px', marginBottom: '10px'}}>
+                    <div style={{ height: '30vh', overflow: 'scroll'}}>
                     <u><b>Earth-to-Mars</b></u>
                     <Row>
                         <Col>
@@ -247,6 +252,7 @@ class RightDashboard extends React.Component {
                             <p>{this.state.distance} km</p>
                         </Col>     
                     </Row>
+                    </div>
                 </Tab>
             </Tabs>
             </div>

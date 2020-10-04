@@ -26,6 +26,10 @@ class Dashboard extends React.Component {
           transmitterGainM: null,
           receiverGainE: null,
           receiverGainM: null,
+          pointingErrorE: null,
+          pointingErrorM: null,
+          noiseFigureE: null,
+          noiseFigureM: null,
           linkMarginEM: 'N/A',
           linkMarginME: 'N/A',
           effBitRateEM: 'N/A',
@@ -148,6 +152,10 @@ class Dashboard extends React.Component {
                             transmitterGainM={this.state.transmitterGainM}
                             receiverGainE={this.state.receiverGainE}
                             receiverGainM={this.state.receiverGainM}
+                            pointingErrorE={this.state.pointingErrorE}
+                            pointingErrorM={this.state.pointingErrorM}
+                            noiseFigureE={this.state.noiseFigureE}
+                            noiseFigureM={this.state.noiseFigureM}
                             updateParameters={this.updateParameters} 
                             updateLocation={this.updateLocation}  
                             updateNumberRelays={this.updateNumberRelays}
