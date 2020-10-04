@@ -19,24 +19,13 @@ var sectionStyle = (picture) => ({
 function SpaceMap(props) {
     const { numberOfRelays } = props
 
-    // remove bottom two blocks and use number of relays instead of Val
-    const [val, setVal] = useState(0)
-    const incrementVal = () => {
-        if (val == 4) {
-            setVal(0)
-        } else {
-            setVal((val) => val + 1)
-        }
-    }
-    
     let pictures = [spacemap0, spacemap1, spacemap2, spacemap3, spacemap4]
-    let picture = pictures[val] // replace with numberOfRelays
+    let picture = pictures[numberOfRelays] // replace with numberOfRelays
 
     return (
         <>
             <Row style={{ height: '640px' }}>
                 <section style={ sectionStyle(picture) }>
-                    <button onClick={() => incrementVal()}>Increment</button>
                 </section>
             </Row>
             <div style={{ width: 0}}> {/* Code just for loading pics and no render flash */}

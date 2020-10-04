@@ -124,7 +124,7 @@ class Dashboard extends React.Component {
                 <div id='PageBody'>
                     <Row style={{ height: '100%', width: '100%', margin: '0'}}>
                         <Col sm={8}>
-                            <SpaceMap numberOfRelays={4 /* Set state, connect to right screen */}/>
+                            <SpaceMap numberOfRelays={this.state.numberRelays}/>
                         </Col>
                         <Col sm={4}>
                             <RightDashboard 
