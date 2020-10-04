@@ -12,9 +12,10 @@ function Response(props) {
         <Card
             bg='dark'
             text='white'
+            className="reverse"
         >
             <Card.Body>
-            <div style={{ height: '30vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+            <div id='style-14' style={{ height: '30vh', overflowY: 'scroll', overflowX: 'hidden' }}>
                     <u><b>Earth-to-Mars</b></u>
                     <Row>
                         <Col>

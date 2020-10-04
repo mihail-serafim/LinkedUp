@@ -117,12 +117,12 @@ class Dashboard extends React.Component {
             <div id='DashboardContent'>
                 <PageHeader id='PageHeader'/>
                 <div id='PageBody'>
-                    <Row style={{ height: '100%', width: '100%', margin: '0'}}>
-                        <Col sm={8}>
+                    <Row style={{ height: '100%', width: '100%', margin: '0'}} className="p-0">
+                        <Col sm={8} className="px-1">
                             <SpaceMap numberOfRelays={this.state.numberRelays}/>
                         </Col>
-                        <Col sm={4}>
-                            <RightDashboard 
+                        <Col sm={4} className="pl-4">
+                            <RightDashboard
                                 {...this.state}
                                 updateParameters={this.updateParameters} 
                                 updateLocation={this.updateLocation}  
@@ -135,15 +135,15 @@ class Dashboard extends React.Component {
                             />
                         </Col>
                     </Row>
-                    <Row>
-                        <Col sm={8}>
+                    <Row className="mt-3">
+                        <Col sm={8} className="ml-2">
                             <Message 
                                 message="" 
                                 updateMessage={(event) => console.log(event.target.value)} 
                                 submitMessage={() => console.log('sumbitted')}
                             />
                         </Col>
-                        <Col>
+                        <Col className="mr-2 ml-2 pl-0">
                             <Response />
                         </Col>
                     </Row>

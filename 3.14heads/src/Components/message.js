@@ -7,6 +7,7 @@ function Message({ message, updateMessage, submitMessage }) {
         <Card
             bg='dark'
             text='white'
+            className="reverse"
             style={{ width: '100%' }}
         >
             <Card.Body>
@@ -27,7 +28,7 @@ function Message({ message, updateMessage, submitMessage }) {
                         variant='success'
                         onClick={submitMessage} 
                     >
-                        Submit
+                        Send Message To Mars
                     </Button>
                 </Form>
             </Card.Body>

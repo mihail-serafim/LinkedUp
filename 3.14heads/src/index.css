@@ -16,6 +16,10 @@ code {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#404041), color-stop(33%,#272727), color-stop(66%,#0a0e0a), color-stop(100%,#0a0809)) !important;
 }
 
+.reverse {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0a0809), color-stop(33%,#0a0e0a), color-stop(66%,#272727) ,color-stop(100%,#404041)) !important;
+}
+
 .form-control {
   color: #e9ecef !important;
   background-color: #292e32 !important;
@@ -39,3 +43,7 @@ code {
 }
 
 a { color: inherit !important; } 
+
+.card {
+  border: none;
+}
