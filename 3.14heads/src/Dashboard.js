@@ -165,7 +165,7 @@ async function updateParametersEndpoint(state) {
       body: JSON.stringify(userJSON),
     };
    
-    const response = await fetch("/updateParameters", requestOptions);
+    const response = await fetch("/api/v1/updateParameters", requestOptions);
     let data = await response.json();
     return data;
   }
