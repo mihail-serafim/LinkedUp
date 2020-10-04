@@ -18,7 +18,7 @@ class RightDashboard extends React.Component {
             bg='dark'
             text='white'
         >
-            <Card.Body>
+            <Card.Body className="mb-3" >
             <Tabs defaultActiveKey="About" id="uncontrolled-tab-example" className="my-3 mb-4 ml-1">
                 <Tab eventKey="Parameters" title='Parameters' style={{ padding: '5px'}}>
                 <div id='style-14' style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden', paddingRight:'10px' }}>
@@ -218,7 +218,7 @@ class RightDashboard extends React.Component {
 
                 <Tab eventKey="About" title="About">
 
-                    <div id='style-14' style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+                    <div className="px-3" id='style-14' style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden' }}>
                     <b>LinkedUp Earth-Mars Communication Simulation Tool</b>
                     <p>
                         As humans take to the stars, we will face many novel challenges.
