@@ -18,8 +18,17 @@ app.post('/updateParameters', (req, res) => {
 	// in close event we are sure that stream from child process is closed
 	python.on('close', (code) => {
 	console.log(`child process close all stdio with code ${code}`);
+	
+	var vals = data.split(' ');
+	var obj = new Object();
+
+	obj.link = vals[0];
+	obj.rate = vals[1];
+	obj.time = vals[2]
+
+	var jsonString = JSON.stringify(obj);
 	// send data to browser
-	res.send(dataToSend)
+	res.send(JSON.parse(jsonString));
 	});
  
 })
