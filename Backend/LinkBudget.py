@@ -273,6 +273,10 @@ try:
     lb = LinkBudget(sys.argv[1])
 except IndexError:
     lb = LinkBudget("{}")
-print("%s %s %s %s" %(lb.evaluate("e_m")))
-print("%s %s %s %s" %(lb.evaluate("m_e")))
+
+e_m = lb.evaluate("e_m")
+m_e = lb.evaluate("m_e")
+
+print("%s %s %s %s %s %s %s %s"%(e_m[0],m_e[0],e_m[1],m_e[1],e_m[2],m_e[2],e_m[3],m_e[3]))
 #print(lb.evaluate_link_margin())
+
