@@ -12,7 +12,7 @@ class PageHeader extends React.Component {
     render() {
         return (
             <Navbar style={{ paddingTop: '15px', paddingBottom: '15px'}} bg="dark" expand="lg" variant='dark' id='NavBar'>
-                <Navbar.Brand ><b style={{ fontSize: '25px', paddingLeft: '15px'}}>3.14Heads</b></Navbar.Brand>
+                <Navbar.Brand ><b style={{ fontSize: '25px', paddingLeft: '15px'}}>LinkedUp</b></Navbar.Brand>
             </Navbar>
         );
     }

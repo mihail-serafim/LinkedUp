@@ -19,7 +19,7 @@ class RightDashboard extends React.Component {
             text='white'
         >
             <Card.Body>
-            <Tabs defaultActiveKey="Parameters" id="uncontrolled-tab-example" className="my-3 ml-1">
+            <Tabs defaultActiveKey="About" id="uncontrolled-tab-example" className="my-3 ml-1">
                 <Tab eventKey="Parameters" title='Parameters' style={{ padding: '5px'}}>
                 <div id='style-14' style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden', paddingRight:'10px' }}>
                     <b>Basic</b>
@@ -46,7 +46,7 @@ class RightDashboard extends React.Component {
                         </Col>
                         <Col>
                             <Form.Group controlId="Relays">
-                                <Form.Label>Number of Relays</Form.Label>
+                                <Form.Label>Relays</Form.Label>
                                 <Form.Control as="select" 
                                 value={this.props.numberRelays} 
                                 onChange={(event) => this.props.updateNumberRelays(event.target.value)}>
@@ -148,7 +148,7 @@ class RightDashboard extends React.Component {
                             <Form.Label>Pointing Error</Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.pointingErrorE} 
-                                        onChange={this.props.updateText}/>degrees
+                                        onChange={this.props.updateText}/>º
                         </Form.Group>
                     </Col>
                 </Row>
@@ -158,7 +158,7 @@ class RightDashboard extends React.Component {
                             <Form.Label>Noise Figure</Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.noiseFigureE} 
-                                        onChange={this.props.updateText}/>
+                                        onChange={this.props.updateText}/>dB
                         </Form.Group>
                     </Col>
                     <Col>
@@ -197,7 +197,7 @@ class RightDashboard extends React.Component {
                             <Form.Label>Pointing Error</Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.pointingErroM} 
-                                        onChange={this.props.updateText}/>degrees
+                                        onChange={this.props.updateText}/>º
                         </Form.Group>
                     </Col>
                 </Row>
@@ -207,7 +207,7 @@ class RightDashboard extends React.Component {
                             <Form.Label>Noise Figure</Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.noiseFigureM} 
-                                        onChange={this.props.updateText}/>
+                                        onChange={this.props.updateText}/>dB
                         </Form.Group>
                     </Col>
                     <Col>
@@ -216,8 +216,37 @@ class RightDashboard extends React.Component {
                 </div>
                 </Tab>
 
-                <Tab eventKey="Help" title="Help">
+                <Tab eventKey="About" title="About">
 
+                    <div id='style-14' style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+                    <b>LinkedUp Earth-Mars Communication Simulation Tool</b>
+                    <p>
+                        As humans take to the stars, we will face many novel challenges.
+                        One such challenge is communication over long distances. Many factors affect how
+                        effectively you can communicate with astronauts as they travel far from Earth. Some of these
+                        challenges include distance, signal interference, and orbital dynamics.
+                    </p>
+                    <p>
+                        This tool was inspired by the "Can you Hear Me Now?" challenge for the 2020 SpaceApps
+                        hackathon. The goal is to simulate/explore how communication would look like with 
+                        people on Mars. With this tool, we hope to explore the effects of placing relays to boost
+                        communication capabilities as well as investigating the physics surrounding
+                        link budgets.
+                    </p>
+                    <p>
+                        A <b>link budget</b> represents an amalgamation of various signal strength factors, including natural
+                        factors such as atmospheric interference and losses over free space. In general, the <b>link margin </b>
+                        is meant to simulate the end behaviour of the signal, showing whether or not the signal is likely
+                        to get through to the other side. In general, a positive link margin represents the fact that a signal
+                        is likely to get through, and a negative represents a signal that is unlikely to get through.
+                    </p>
+                    <p>
+                        This tool will allow you to get a hands on experience of how sensitive communications systems are by
+                        varying some parameters and creating a link budget. You will also have an opportunity to investigate the
+                        effects of adding relay stations along the way to Mars. We also briefly investigate a potential solution
+                        to the issue of falling out of contact with Mars for parts of the year.
+                    </p>
+                    </div>
                 </Tab>
             </Tabs>
 
