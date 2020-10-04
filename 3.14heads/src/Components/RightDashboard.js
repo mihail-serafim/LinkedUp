@@ -21,7 +21,7 @@ class RightDashboard extends React.Component {
             <Card.Body>
             <Tabs defaultActiveKey="Parameters" id="uncontrolled-tab-example" className="my-3 ml-1">
                 <Tab eventKey="Parameters" title='Parameters' style={{ padding: '5px'}}>
-                <div style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+                <div id='style-14' style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden', paddingRight:'10px' }}>
                     <b>Basic</b>
                     <Row>
                         <Col>
@@ -114,7 +114,7 @@ class RightDashboard extends React.Component {
                 </Tab>
 
                 <Tab eventKey="Advanced Params" title="Advanced Params" >
-                <div style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden' }}>
+                <div id='style-14' style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden' }}>
                 <b>Earth</b>
                 <Row>
                     <Col>
@@ -216,7 +216,7 @@ class RightDashboard extends React.Component {
                 </div>
                 </Tab>
 
-                <Tab eventKey="Help" title="Help/How-to">
+                <Tab eventKey="Help" title="Help">
 
                 </Tab>
             </Tabs>
