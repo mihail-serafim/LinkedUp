@@ -26,7 +26,7 @@ def getweather(citystring):
     else:
         rain = False
 
-    #rel_humidity(%),temp(deg C),pressure,clouds(%),rain
+    #rel_humidity(%),temp(deg C),pressure(Pa),clouds(%),rain(True/False)
     return [one_call.current.humidity, weather.temperature('celsius')['temp'], 100*weather.pressure['press'], weather.clouds, rain]
 
 
