@@ -1,16 +1,28 @@
 import math
+import json
+import getweather
+import numpy
+import sys
 from constants import *
 
 class LinkBudget():
-    def __init__(self):
+    def __init__(self, params_from_site):
+        j = json.loads(params_from_site)
+
+        self.location = j.get("location", "Toronto, Canada")
+        weather = getweather.getweather(self.location)
+
+        self.date = j.get("date","2020-10-01").strip("-")
+
         self.params = {
-            "time" : {
-                "year": 2000,
-                "month": 12,
-                "day": 13
+            "time" : { # TODO - implement from json
+                "year": self.date[0],
+                "month": self.date[1],
+                "day": self.date[2]
             },
             "noise" : {
-                "rx_nf": 6 #dB
+                "e_m_rx_nf": j.get("noiseFigureE",6), #dB
+                "m_e_rx_nf": j.get("noiseFigureM",6)
             },
             "data" : {
                 "framing_data_per_packet" : 8, #bytes
@@ -20,43 +32,43 @@ class LinkBudget():
                 "file_size" : 1000000 #bits
             },
             "earth_air" : {
-                "rel_humidity": 70, #percent
-                "temp": 25, # degrees Celsius
-                "pressure": 760, #hPa
-                "rain" : True, #yes/no
-                "clouds" : True #yes/no
+                "rel_humidity": weather[0], #percent
+                "temp": weather[1], # degrees Celsius
+                "pressure": weather[2], #hPa
+                "rain" : weather[4], #yes/no
+                "clouds" : weather [3] #yes/no
             },
             "mars_air" : {
                 "rel_humidity": 70, #percent
-                "temp": 25, # degrees Celsius
+                "temp": -60, # degrees Celsius
                 "pressure": self.mars_atm(), #hPa
                 "rain" : False, #yes/no
-                "clouds" : False #yes/no
+                "clouds" : 0 #yes/no
             },
             "carrier" : {
-                "bandwidth" : 0.02, #GHz 
-                "frequency" : 10, #GHz(must be between 6 and 12)
+                "bandwidth" : j.get("frequency",0.02), #GHz 
+                "frequency" : j.get("frequency",10), #GHz(must be between 6 and 12)
                 "relays" : 2
             },
             "e_m_tx" : {
-                "tx_out_w" : 100, 
-                "efficiency" : 12,
-                "tx_gain" : 10 #dB
+                "tx_out_w" : j.get("transmitterPowerE",100), 
+                "efficiency" : j.get("transmitterEffE",12),
+                "tx_gain" : j.get("transmitterGainM",10) #dB
             },
             "e_m_rx" : {
                 "eff_diameter" : 1, # OUTPUT - metres
-                "pointing_error" : 0.5, #degrees
-                "rx_gain" : 50 #dB
+                "pointing_error" : j.get("pointingErrorE",0.5), #degrees
+                "rx_gain" : j.get("receiverGainE",50) #dB
             },
             "m_e_tx" : {
-                "tx_out_w" : 100, 
-                "efficiency" : 12,
-                "tx_gain" : 10 #dB
+                "tx_out_w" : j.get("transmitterPowerW",100), 
+                "efficiency" : j.get("transmitterEffM",12),
+                "tx_gain" : j.get("transmitterGainE", 10) #dB
             },
             "m_e_rx" : {
                 "eff_diameter" : 1, # OUTPUT - metres
-                "pointing_error" : 0.5, #degrees
-                "rx_gain" : 50 #dB
+                "pointing_error" : j.get("pointingErrorM",0.5), #degrees
+                "rx_gain" : j.get("receiverGainM",50) #dB
             }
         }
     
@@ -169,13 +181,10 @@ class LinkBudget():
             return 0
 
     def cloud_fade(self, clouds):
-        if clouds:
-            return 0.4
-        else:
-            return 0
+        return 0.4 * clouds/100
 
     def fspl(self, distance, frequency, relays):
-        return(20*math.log(distance/relays) + 20*math.log(frequency) + 92.45)
+        return(20*math.log(distance/(relays+1)) + 20*math.log(frequency) + 92.45)
 
     def path_losses(self):
         year = self.params["time"]["year"]
@@ -238,7 +247,7 @@ class LinkBudget():
 
         file_size = self.params["data"]["file_size"]
 
-        rx_nf = self.params["noise"]["rx_nf"]
+        rx_nf = self.params["noise"]["%s_rx_nf"%(direction)]
         relays = self.params["carrier"]["relays"]
 
         carry_through = tx_out_db + tx_gain #terminal EIRP
@@ -264,7 +273,10 @@ class LinkBudget():
 
         return(margin, bitrate_eff, time_elapsed, distance)
 
-lb = LinkBudget()
+try:
+    lb = LinkBudget(sys.argv[1])
+except IndexError:
+    lb = LinkBudget("{}")
 print("%s %s %s %s" %(lb.evaluate("e_m")))
 print("%s %s %s %s" %(lb.evaluate("m_e")))
 #print(lb.evaluate_link_margin())
