@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.bg-dark {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#404041), color-stop(33%,#272727), color-stop(66%,#0a0e0a), color-stop(100%,#0a0809)) !important;
+}
+
+.form-control {
+  color: #e9ecef !important;
+  background-color: #292e32 !important;
+  border: none !important;
+}
+
+.nav-link.active {
+  background-color: inherit !important;
+  box-shadow: 0 0 10px #fff !important; 
+}
+
+.nav-link {
+  border: none !important;
+  border-left: 1px solid #6c757d !important;
+  border-bottom: 1px solid #6c757d !important;
+}
+
+.nav-link:first-child {
+  border: none !important;
+  border-bottom: 1px solid #6c757d !important;
+}
+
+a { color: inherit !important; } 
