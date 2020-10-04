@@ -12,11 +12,12 @@ function Response(props) {
         <Card
             bg='dark'
             text='white'
-            className="reverse"
+            className="reverse mb-3"
         >
             <Card.Body>
+            <Card.Title className="mt-3 mb-3">Response from Mars</Card.Title>
+
             <div id='style-14' style={{ height: '30vh', overflowY: 'scroll', overflowX: 'hidden' }}>
-                    <u><b>Earth-to-Mars</b></u>
                     <Row>
                         <Col>
                             <p><b>Link Margin:</b></p>

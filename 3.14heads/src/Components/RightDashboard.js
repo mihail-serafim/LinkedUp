@@ -19,7 +19,7 @@ class RightDashboard extends React.Component {
             text='white'
         >
             <Card.Body>
-            <Tabs defaultActiveKey="About" id="uncontrolled-tab-example" className="my-3 ml-1">
+            <Tabs defaultActiveKey="About" id="uncontrolled-tab-example" className="my-3 mb-4 ml-1">
                 <Tab eventKey="Parameters" title='Parameters' style={{ padding: '5px'}}>
                 <div id='style-14' style={{ height: '70vh', overflowY: 'scroll', overflowX: 'hidden', paddingRight:'10px' }}>
                     <b>Basic</b>
@@ -250,7 +250,7 @@ class RightDashboard extends React.Component {
                 </Tab>
             </Tabs>
 
-            <Button variant="success" className="float-right" onClick={() => this.props.updateParameters()} style={{ marginTop: '10px' }}>Update Simulation Parameters</Button>
+            <Button variant="success" className="float-right" onClick={() => this.props.updateParameters()} style={{ marginTop: '25px' }}>Update Parameters</Button>
             </Card.Body>
             </Card>
         );
