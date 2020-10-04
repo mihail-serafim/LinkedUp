@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row, Tabs, Tab, Form, Button } from 'react-bootstrap';
+import { Card, Col, Row, Tabs, Tab, Form, Button } from 'react-bootstrap';
 
 
 class RightDashboard extends React.Component {
@@ -58,7 +58,7 @@ class RightDashboard extends React.Component {
     }
 
     updateTransmitterPower = (event) => {
-        console.log(event.target.value)
+        console.log(event)
         this.props.updateTransmitterPower(event.target.value)
         this.setState({
             transmitterPower: event.target.value
@@ -67,9 +67,13 @@ class RightDashboard extends React.Component {
 
     render() {
         return (
-            <div>
-            <Tabs defaultActiveKey="Parameters" id="uncontrolled-tab-example" style={{ backgroundColor: 'white', marginTop: '10px'}}>
-                <Tab eventKey="Parameters" title='Parameters' style={{ backgroundColor: 'white', padding: '5px'}}>
+            <Card
+            bg='dark'
+            text='white'
+        >
+            <Card.Body>
+            <Tabs defaultActiveKey="Parameters" id="uncontrolled-tab-example" className="my-3 ml-1">
+                <Tab eventKey="Parameters" title='Parameters' style={{ padding: '5px'}}>
                     <b>Basic</b>
                     <Row>
                         <Col>
@@ -147,20 +151,21 @@ class RightDashboard extends React.Component {
                         </Col>
                     </Row>
                 </Tab>
-                <Tab eventKey="Advanced Params" title="Advanced Params" style={{ backgroundColor: 'white'}}>
+                <Tab eventKey="Advanced Params" title="Advanced Params" >
 
                 </Tab>
-                <Tab eventKey="Help" title="Help/How-to" style={{ backgroundColor: 'white'}}>
+                <Tab eventKey="Help" title="Help/How-to" >
 
                 </Tab>
             </Tabs>
-            <Button variant="outline-primary" onClick={this.updateParameters} style={{ marginTop: '10px' }}>Update Simulation Parameters</Button>
-             <Tabs defaultActiveKey="Results" id="uncontrolled-tab-example" style={{ backgroundColor: 'white', marginTop: '10px'}}>
-                <Tab eventKey="Results" title='Results' style={{ backgroundColor: 'white', padding: '5px', marginBottom: '10px'}}>
+            <Button variant="success" className="float-right" onClick={this.updateParameters} style={{ marginTop: '10px' }}>Update Simulation Parameters</Button>
+             <Tabs defaultActiveKey="Results" id="uncontrolled-tab-example" style={{ marginTop: '10px'}}>
+                <Tab eventKey="Results" title='Results' style={{ padding: '5px', marginBottom: '10px'}}>
                     hi
                 </Tab>
             </Tabs>
-            </div>
+            </Card.Body>
+            </Card>
         );
     }
 }

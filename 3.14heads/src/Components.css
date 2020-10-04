@@ -10,6 +10,6 @@ html, body, #root {
 
 #PageBody {
     height: 100%;
-    background-color: rgb(223, 221, 221);
+    background-color: #000;
     vertical-align: top;
 }

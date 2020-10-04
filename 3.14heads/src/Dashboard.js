@@ -79,10 +79,10 @@ class Dashboard extends React.Component {
 
                 <div id='PageBody'>
                     <Row style={{ height: '100%', width: '100%', margin: '0'}}>
-                        <Col sm={8} style={{ border: 'solid', height: '100%'}}>
+                        <Col sm={8}>
                             <SpaceMap numberOfRelays={4 /* Set state, connect to right screen */}/>
                         </Col>
-                        <Col sm={4} style={{ border: 'solid', height: '100%'}}>
+                        <Col sm={4}>
                             <RightDashboard 
                             location={this.state.location}
                             date={this.state.date}
@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={6} style={{ border: 'solid', height: '100%'}}>
+                        <Col sm={8} className="mx-3 my-2">
                         {/* message board */}
                             <Message 
                                 message="" 
@@ -108,16 +108,11 @@ class Dashboard extends React.Component {
                                 submitMessage={() => console.log('sumbitted')}
                             />
                         </Col>
-                        <Col sm={6} style={{ border: 'solid', height: '100%'}}>
-                            <Response
-                                message="blah"
-                            />
-                        </Col>
                     </Row>
 
                 </div>
 
-                <PageFooter id='PageFooter' />
+                {/* TODO: add back -> <PageFooter id='PageFooter' /> */} 
             </div>
         );
     }
