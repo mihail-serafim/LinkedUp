@@ -116,7 +116,6 @@ class Dashboard extends React.Component {
         return (
             <div id='DashboardContent'>
                 <PageHeader id='PageHeader'/>
-
                 <div id='PageBody'>
                     <Row style={{ height: '100%', width: '100%', margin: '0'}}>
                         <Col sm={8}>
@@ -156,9 +155,9 @@ class Dashboard extends React.Component {
     }
 }
 
-//Endpoints
-async function updateParametersEndpoint() {
-    let userJSON = {};
+// Endpoints
+async function updateParametersEndpoint(state) {
+    let userJSON = state;
     userJSON.projectID = null;
     const requestOptions = {
       method: "POST",
