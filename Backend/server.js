@@ -1,8 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const { spawn } = require('child_process');
 var app = express();
 
-const port = 8080;
+const port = 5000;
 
 app.use(bodyParser.json());
 app.use(
@@ -13,13 +14,13 @@ app.use(
 );
 
 //runs python script on post request 
-app.post('/api/v1/updateParameters', (req, res) => {
+app.post("/api/v1/updateParameters", function(req, res) {
 	console.log(req.body);
 	var dataToSend;
 	
 	// spawn new child process to call the python script
 	//to pass parameters to script1.py, use [‘script1.py’,’param1’,’param2’, ...] and sys.argv[1] in python script   
-	const python = spawn('python', ['LinkBudget.py', JSON.strigify(req.body)]);
+	const python = spawn('python', ['LinkBudget.py', JSON.stringify(req.body)]);
 	// collect data from script
 	python.stdout.on('data', function (data) {
 		console.log('Pipe data from python script ...');
@@ -47,7 +48,7 @@ app.post('/api/v1/updateParameters', (req, res) => {
 	res.send(JSON.parse(jsonString));
 	});
  
-})
+});
 
 app.listen(port);
  
