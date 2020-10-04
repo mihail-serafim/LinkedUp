@@ -3,9 +3,9 @@ var app = express();
 
 const port = 5000;
 
-//runs python script on GET request 
+//runs python script on post request 
 app.post('/updateParameters', (req, res) => {
- 
+	
 	var dataToSend;
 	// spawn new child process to call the python script
 	//to pass parameters to script1.py, use [‘script1.py’,’param1’,’param2’, ...] and sys.argv[1] in python script   
@@ -19,15 +19,16 @@ app.post('/updateParameters', (req, res) => {
 	python.on('close', (code) => {
 	console.log(`child process close all stdio with code ${code}`);
 	
+	// process python output to JSON object
 	var vals = data.split(' ');
 	var obj = new Object();
 
 	obj.link = vals[0];
 	obj.rate = vals[1];
-	obj.time = vals[2]
+	obj.time = vals[2];
 
 	var jsonString = JSON.stringify(obj);
-	// send data to browser
+	// send JSON object to browser
 	res.send(JSON.parse(jsonString));
 	});
  
