@@ -12,7 +12,7 @@ function Response(props) {
         <Card
             bg='dark'
             text='white'
-            className="reverse"
+            className="reverse mb-3"
         >
             <Card.Body>
             <Card.Title className="mt-3 mb-3">Response from Mars</Card.Title>
