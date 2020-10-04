@@ -10,13 +10,14 @@ class LinkBudget():
                 "day": 13
             },
             "noise" : {
-                "rx_nf": 10 #dB
+                "rx_nf": 6 #dB
             },
             "data" : {
                 "framing_data_per_packet" : 8, #bytes
                 "packet_size" : 1024, #bytes
                 "ber" : 0.00001, #errors/bit
                 "nominal_bitrate" : 10000000, #bits/second
+                "file_size" : 1000000 #bits
             },
             "earth_air" : {
                 "rel_humidity": 70, #percent
@@ -28,13 +29,14 @@ class LinkBudget():
             "mars_air" : {
                 "rel_humidity": 70, #percent
                 "temp": 25, # degrees Celsius
-                "pressure": 760, #hPa
+                "pressure": self.mars_atm(), #hPa
                 "rain" : False, #yes/no
                 "clouds" : False #yes/no
             },
             "carrier" : {
                 "bandwidth" : 0.02, #GHz 
-                "frequency" : 10 #GHz(must be between 6 and 12)
+                "frequency" : 10, #GHz(must be between 6 and 12)
+                "relays" : 2
             },
             "tx" : {
                 "tx_out_db" : 15, #dB
@@ -43,13 +45,20 @@ class LinkBudget():
             "rx" : {
                 "eff_diameter" : 1, # OUTPUT - metres
                 "pointing_error" : 0.5, #degrees
-                "rx_gain" : 40 #dB
+                "rx_gain" : 50 #dB
             },
-            "relay_tx" : {
-                "tx_out_db" : 12, #dB
-                "tx_gain" : 12 #dB
-            }
         }
+    
+    def mars_atm(self):
+        try:
+            with open('MET_Phoenix_data.csv','r') as f:
+                pressures = []
+                for line in f:
+                    pressures.append(float(line.split(',')[1]))
+        except:
+            return 6.1
+
+        return sum(pressures)/len(pressures) #average pressure, in Pa 
 
     def dist_mars(year, month, day, hour=0, minute=0):
         try:
@@ -68,8 +77,9 @@ class LinkBudget():
         self.params["noise"][label] = value
 
     def evaluate_noise_power(self, rx_nf):
-        noise_temp = t_ref*(10 ** (rx_nf/10) -1)
-        return(k * noise_temp * self.params["carrier"]["bandwidth"])
+        noise_temp = t_ref*(10 ** (rx_nf/10) - 1)
+        #print("noise_temp: ", noise_temp)
+        return(math.log(k * noise_temp * self.params["carrier"]["bandwidth"] * 10000000000)*10)
 
     def evaluate_required_ebn0(self, ber):
         if ber > 0.1:
@@ -127,7 +137,9 @@ class LinkBudget():
         e = e_w_prime * rel_humidity /100
         return(e/(temp + 273) / r) #grams per m^3
 
-    def earth_gas_losses(self, temp, rel_humidity, frequency, pressure):
+        return (a + b*self.abs_humidity(temp, rel_humidity, pressure) + c*temp)
+
+    def gas_losses(self, temp, rel_humidity, frequency, pressure):
         const_bounds = {
             "a": [0.04044, 0.043596],
             "b": [0.0031768, 0.00065086],
@@ -151,26 +163,48 @@ class LinkBudget():
         else:
             return 0
 
-    def fspl(self, distance, frequency):
-        return(20*math.log(distance) + 20*math.log(frequency) + 92.45)
+    def fspl(self, distance, frequency, relays):
+        return(20*math.log(distance/relays) + 20*math.log(frequency) + 92.45)
 
     def path_losses(self):
+        year = self.params["time"]["year"]
+        month = self.params["time"]["month"]
+        day = self.params["time"]["day"]
+        distance = self.dist_mars(year, month, day)
         frequency = self.params["carrier"]["frequency"]
         clouds = self.params["earth_air"]["clouds"]
         rain = self.params["earth_air"]["rain"]
         rel_humidity = self.params["earth_air"]["rel_humidity"]
         temp = self.params["earth_air"]["temp"]
         pressure = self.params["earth_air"]["pressure"]
+        relays = self.params["carrier"]["relays"]
 
         distance = self.dist_mars(2000, 12, 1)
-        fspl = self.fspl(distance, frequency)
+        fspl = self.fspl(distance, frequency, relays)
+        #print("fspl: ",fspl)
         cloud_fade = self.cloud_fade(clouds)
+        #print("cloud_fade: ",cloud_fade)
         rain_fade = self.rain_fade(rain)
-        earth_gas_losses = self.earth_gas_losses(temp, rel_humidity, frequency, pressure)
+        #print("rain_fade: ",rain_fade)
+        earth_gas_losses = self.gas_losses(temp, rel_humidity, frequency, pressure)
+        #print("earth_gas_losses: ",earth_gas_losses)
 
-        return(distance + fspl + cloud_fade + rain_fade + earth_gas_losses)
+        mars_rel_humidity = self.params["mars_air"]["rel_humidity"]
+        mars_temp = self.params["mars_air"]["temp"]
+        mars_pressure = self.params["mars_air"]["pressure"]
 
-    def evaluate_link_margin(self):
+        mars_gas_losses = self.gas_losses(mars_temp, mars_rel_humidity, frequency, mars_pressure)
+
+        #print("path_losses: ", (fspl + cloud_fade + rain_fade + earth_gas_losses))
+
+        return(fspl + cloud_fade + rain_fade + earth_gas_losses + mars_gas_losses)
+
+    def evaluate(self):
+
+        year = self.params["time"]["year"]
+        month = self.params["time"]["month"]
+        day = self.params["time"]["day"]
+        distance = self.dist_mars(year, month, day)
         tx_out_db = self.params["tx"]["tx_out_db"]
         tx_gain = self.params["tx"]["tx_gain"]
         rx_gain = self.params["rx"]["rx_gain"]
@@ -187,23 +221,34 @@ class LinkBudget():
         rel_humidity = self.params["earth_air"]["rel_humidity"]
         pressure = self.params["earth_air"]["pressure"]
 
+        file_size = self.params["data"]["file_size"]
+
         rx_nf = self.params["noise"]["rx_nf"]
+        relays = self.params["carrier"]["relays"]
 
         carry_through = tx_out_db + tx_gain #terminal EIRP
-        print("EIRP: "carry_through)
+        #print("EIRP: ", carry_through)
         carry_through -= self.path_losses()  #received isotropic power
-        print("Isotropic Power: "carry_through)
+        #print("Isotropic Power: ", carry_through)
         carry_through += rx_gain
-        print("asdf: "carry_through)
+        #print("asdf: ", carry_through)
         carry_through -= self.rx_pointing_loss(frequency, rx_gain) #received signal power
-        print("Signal Power: "carry_through)
+        #print("Signal Power: ", carry_through)
 
         carry_through -= self.evaluate_noise_power(rx_nf) #received CNR
-        print("Received CNR: "carry_through)
+        #print("noise power: ", self.evaluate_noise_power(rx_nf))
+        #print("Received CNR: ", carry_through)
         carry_through -= 10*math.log(frequency/bandwidth) #received Eb/N0
-        print("Eb/N0: "carry_through)
+        #print("Eb/N0: ", carry_through)
 
-        return(carry_through - self.evaluate_required_ebn0(self.params["data"]["ber"])) #link margin
+        margin = carry_through - self.evaluate_required_ebn0(self.params["data"]["ber"]) #link margin
+
+        bitrate_eff = self.check_bitrate_eff(bitrate, ber, packet_size, framing_size)
+
+        time_elapsed = distance * 2 / c + file_size / bitrate_eff
+
+        return(margin, bitrate_eff, time_elapsed, distance)
 
 lb = LinkBudget()
-print(lb.evaluate_link_margin())
+print("%s %s %s %s" %(lb.evaluate()))
+#print(lb.evaluate_link_margin())
