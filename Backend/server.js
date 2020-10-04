@@ -1,11 +1,20 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 var app = express();
 
-const port = 5000;
+const port = 8080;
+
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    // to support URL-encoded bodies
+    extended: true,
+  })
+);
 
 //runs python script on post request 
 app.post('/api/v1/updateParameters', (req, res) => {
-	console.log('Request body');
+	console.log(req.body);
 	var dataToSend;
 	
 	// spawn new child process to call the python script
@@ -39,14 +48,6 @@ app.post('/api/v1/updateParameters', (req, res) => {
 	});
  
 })
-
-app.use(bodyParser.json());
-app.use(
-	bodyParser.urlencoded({
-	// to support URL-encoded bodies
-	extended: true,
-	})
-);
 
 app.listen(port);
  
