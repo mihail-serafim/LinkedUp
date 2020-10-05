@@ -265,7 +265,7 @@ class LinkBudget():
 
         bitrate_eff = self.check_bitrate_eff(bitrate, ber, packet_size, framing_size)
 
-        time_elapsed = distance * 2 / c + file_size / bitrate_eff
+        time_elapsed = distance* 1000 * 2 / c + file_size / bitrate_eff
 
         return({
             "margin" : margin,
