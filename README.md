@@ -12,7 +12,7 @@ LinkedUp features an intutive UI paired with live data and NASA handbooks to cal
 
 #### Front End Installation
  - In your command line/terminal:
-   - Navigate to ```3.14Heads-SpaceApps2020/3.14heads``` using ```cd```
+   - Navigate to ```LinkedUp/3.14heads``` using ```cd```
    - ```npm install```
 
 
@@ -24,12 +24,12 @@ LinkedUp features an intutive UI paired with live data and NASA handbooks to cal
    pip pyowm
    pip skyfield
 ```
-   - Navigate to ```3.14Heads-SpaceApps2020/Backend``` using ```cd```
+   - Navigate to ```LinkedUp/Backend``` using ```cd```
      - ```npm install```
 ####  Running the Tool
- - Navigate to ```3.14Heads-SpaceApps2020/Backend```
+ - Navigate to ```LinkedUp/Backend```
    - ```node server.js```
- - Navigate to ```3.14Heads-SpaceApps2020/3.14heads```
+ - Navigate to ```LinkedUp/3.14heads```
    - ```npm start```
  Once you've done all the above steps, the tool will be accessible at [localhost:3000](http://localhost:3000/) 
 
