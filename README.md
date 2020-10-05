@@ -16,5 +16,9 @@ The view is broken into 4 major components
   - This contains a text area where users can type a message and send to Mars (similutate the singal based on the parameters previous defiend)
  ### The Results Card
   - This is where users can see the outcome of the message and parameter options.
-    
+ 
+ | ![frontend1.png](images/frontend1.png) | 
+ |:--:| 
+ | *Left: The space map   Right: The parameters dashboard* |
+ 
 ## Back-end
