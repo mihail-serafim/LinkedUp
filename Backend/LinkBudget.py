@@ -277,6 +277,9 @@ except IndexError:
 e_m = lb.evaluate("e_m")
 m_e = lb.evaluate("m_e")
 
-print("%s %s %s %s %s %s %s %s"%(e_m[0],m_e[0],e_m[1],m_e[1],e_m[2],m_e[2],e_m[3],m_e[3]))
-#print(lb.evaluate_link_margin())
+f = open("LinkBudgetOut.txt", "w")
+f.write(str(e_m[0]) + ' ' + str(m_e[0]) + ' ' + str(e_m[1]) + ' ' + str(m_e[1]) + ' ' + str(e_m[2]) + ' ' + str(m_e[2]) + ' ' + str(e_m[3]) + ' ' + str(m_e[3]))
+f.close()
+
+
 
