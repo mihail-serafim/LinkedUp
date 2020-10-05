@@ -140,7 +140,15 @@ class Dashboard extends React.Component {
                             />
                         </Col>
                         <Col className="mr-2 ml-2 pl-0">
-                            <Response />
+                            <Response 
+                                linkMarginEM={this.state.linkMarginEM}
+                                linkMarginME={this.state.linkMarginMe}
+                                effBitRateEM={this.state.effBitRateEM}
+                                effBitRateME={this.state.effBitRateME}
+                                messageTimeEM={this.state.messageTimeEM}
+                                messageTimeME={this.state.messageTimeME}
+                                distance={this.state.distance}  
+                            />
                         </Col>
                     </Row>
                 </div>
