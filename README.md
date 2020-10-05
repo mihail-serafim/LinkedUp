@@ -55,8 +55,10 @@ Our backend relies on Node, Express, and Python. We used node's build-in [child 
 
 ## Data
  - LinkUp uses uses data from a variety of APIs and databases; including CSA data.
-   - For Earth atmospheric data, including pressure, humidity, temperature, clouds, and more, we used [skyfield api](https://rhodesmill.org/skyfield/)  
-
+   - For Mars atmospheric data, we used [Meteorological Station (MET) of the Phoenix Mission](https://www.asc-csa.gc.ca/eng/open-data/access-the-data.asp) | [more data](ftp://ftp.asc-csa.gc.ca/users/OpenData_DonneesOuvertes/pub/MET/)
+   - For Earth atmospheric data, including pressure, humidity, temperature, clouds, and more, we used [skyfield api](https://rhodesmill.org/skyfield/) 
+   - [Handbook for the estimation of microwave propagation effects](https://ntrs.nasa.gov/citations/19820004428)
+   - [pyOWM](https://pyowm.readthedocs.io/en/latest/) (Open Weather Maps)
 ## What's Next?
 
 
