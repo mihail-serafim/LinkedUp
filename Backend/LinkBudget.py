@@ -8,7 +8,7 @@ from skyfield.api import load
 
 class LinkBudget():
     def __init__(self, params_from_site):
-        j = json.loads(params_from_site)
+        j = params_from_site
 
         self.location = j.get("location", "Toronto, Canada")
         weather = getweather.getweather(self.location)
@@ -267,12 +267,22 @@ class LinkBudget():
 
         time_elapsed = distance * 2 / c + file_size / bitrate_eff
 
-        return(margin, bitrate_eff, time_elapsed, distance)
+        return({
+            "margin" : margin,
+            "bitrate_eff" : bitrate_eff,
+            "time_elapsed" : time_elapsed,
+            "distance" : distance
+        })
 
 try:
-    with "input.json" as f:
-        json_dict = json.load(f)
-        lb = LinkBudget(json_dict)
+    with open("input.json",'r') as f:
+        json_string = f.readline()
+        json_dict = json.loads(json_string)
+        new_dict = {}
+        for key in json_dict.keys():
+            if json_dict[key] != "":
+                new_dict[key] = json_dict[key]
+        lb = LinkBudget(new_dict)
 except FileNotFoundError:
     lb = LinkBudget("{}")
 except IndexError:
@@ -281,8 +291,10 @@ except IndexError:
 e_m = lb.evaluate("e_m")
 m_e = lb.evaluate("m_e")
 
-f = open("LinkBudgetOut.txt", "w")
-f.write(str(e_m[0]) + ' ' + str(m_e[0]) + ' ' + str(e_m[1]) + ' ' + str(m_e[1]) + ' ' + str(e_m[2]) + ' ' + str(m_e[2]) + ' ' + str(e_m[3]) + ' ' + str(m_e[3]))
+to_write = {"e_m" : e_m, "m_e" : m_e}
+
+f = open("LinkBudgetOut.json", "w")
+f.write(json.dumps(to_write))
 f.close()
 
 
