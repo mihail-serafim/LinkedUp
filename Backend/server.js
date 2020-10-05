@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+var fs = require('fs');
 
 const { spawn } = require('child_process');
 
@@ -17,18 +18,19 @@ app.use(
 
 
 //runs python script on post request 
-app.post("/api/v1/updateParameters", function(req, res) {
+app.post("/api/v1/updateParameters", async function (req, res) {
 	console.log(req.body);
 	var dataToSend;
 	
+	await fs.writeFile('input.json',JSON.stringify(req.body), function (err) {
+		if (err) throw err;
+		console.log('File is created successfully.');
+	  }); 
 	// spawn new child process to call the python script
 	//to pass parameters to script1.py, use [‘script1.py’,’param1’,’param2’, ...] and sys.argv[1] in python script   
 	py = spawn('python', ['LinkBudget.py']); //JSON.stringify(req.body)
 	// collect data from script
-	py.stdout.on('data', function (data) {
-		console.log('Pipe data from python script ...');
-		dataToSend = data.toString();
-	});
+	fs.writeFile('input.json',JSON.stringify(req.body))
 	// in close event we are sure that stream from child process is closed
 	py.on('close', (code) => {
 	console.log(`child process close all stdio with code ${code}`);
