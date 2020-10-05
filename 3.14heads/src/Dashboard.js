@@ -109,7 +109,11 @@ class Dashboard extends React.Component {
                 <div id='PageBody'>
                     <Row style={{ height: '100%', width: '100%', margin: '0'}} className="p-0">
                         <Col sm={8} className="px-1">
-                            <SpaceMap numberOfRelays={this.state.numberRelays}/>
+                            <SpaceMap 
+                                numberOfRelays={this.state.numberRelays} 
+                                linkMarginEM={this.state.linkMarginEM} 
+                                linkMarginME={this.state.linkMarginME}
+                            />
                         </Col>
                         <Col sm={4} className="pl-4">
                             <RightDashboard
