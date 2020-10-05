@@ -6,6 +6,32 @@ LinkedUp allows us to explore this problem. It's a sandbox where people to play 
 
 LinkedUp features an intutive UI paired with live data and NASA handbooks to calulate singal transmission. Built on React and Node (Express), this project was made during the SpaceApps 2020 Hackathon.
 
+## Installation 
+ - Install [npm](https://www.npmjs.com/get-npm)
+
+### Front End Installation
+ - In your command line/terminal:
+   - Navigate to ```3.14Heads-SpaceApps2020/3.14heads``` using ```cd```
+   - ```npm install```
+
+
+### Back End Installation
+ - Install [Python](https://www.python.org/downloads/)
+ - In your command line/terminal, use the following commands:
+ ```
+   pip numpy
+   pip pyowm
+   pip skyfield
+```
+   - Navigate to ```3.14Heads-SpaceApps2020/Backend``` using ```cd```
+     - ```npm install```
+###  Running the Tool
+ - Navigate to ```3.14Heads-SpaceApps2020/Backend```
+   - ```node server.js```
+ - Navigate to ```3.14Heads-SpaceApps2020/3.14heads```
+   - ```npm start```
+ Once you've done all the above steps, the tool will be accessible at [localhost:3000](http://localhost:3000/) 
+
 ## Front-end
 The view is broken into 4 major components
  ### The Space Map
@@ -21,5 +47,10 @@ The view is broken into 4 major components
  |:--:| 
  | *Left: The space map&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right: The parameters dashboard* |
  | ![frontend2.PNG](images/frontend2.PNG) |  
- | *Left: The message card map&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right: The results card* |
+ | *Left: The message card&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right: The results card* |
 ## Back-end
+The backend relies on Node, Express, and Python. We used 
+
+## Data
+LinkUp uses uses data from a variety of APIs and databases; including CSA data
+
