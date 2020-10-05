@@ -4,7 +4,7 @@ But what happens when we get there? How will we communicate back home? How will 
 
 LinkedUp allows us to explore this problem. It's a sandbox where people to play with different communication parameters for signals to and from Mars. 
 
-LinkedUp features an intutive UI paired with live data and "accurate" calucations for singal transmission. Built on React and Node (Express), this project was made during the SpaceApps 2020 Hackathon.
+LinkedUp features an intutive UI paired with live data and NASA handbooks to calulate singal transmission. Built on React and Node (Express), this project was made during the SpaceApps 2020 Hackathon.
 
 ## Front-end
 The view is broken into 4 major components
