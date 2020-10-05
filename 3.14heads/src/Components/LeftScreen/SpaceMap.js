@@ -43,7 +43,7 @@ function SpaceMap(props) {
     } else {
         lasersIndex = 3
     }
-console.log(linkMarginEM)
+
     let pictures = [
         [spacemap00, spacemap0e, spacemap0m, spacemap0s],
         [spacemap10, spacemap1e, spacemap1m, spacemap1s],
