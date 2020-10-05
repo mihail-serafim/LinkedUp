@@ -35,13 +35,13 @@ LinkedUp features an intutive UI paired with live data and NASA handbooks to cal
 
 ## Front-end
 The view is broken into 4 major components
- ### The Space Map
-  - It features a picture of Earth and Mars. When a message is sent it shows the signals between the two planets and also displays relays (satellites serve as intermediaries for communication).
- ### The Parameters Dashboard
+ #### Space Map
+  - Features a picture of Earth and Mars. When a message is sent it shows the signals between the two planets and also displays relays (satellites serve as intermediaries for communication).
+ #### Parameters Dashboard
   - This displays the parameters that users can play with to modify the signal behaviour. It also features Advanced Parameters for advanced options and an about section.
- ### The Message Card
+ #### Message Card
   - This contains a text area where users can type a message and send to Mars (similutate the singal based on the parameters previous defiend)
- ### The Results Card
+ #### Results Card
   - This is where users can see the outcome of the message and parameter options.
  
  | ![frontend1.PNG](images/frontend1.PNG) | 
