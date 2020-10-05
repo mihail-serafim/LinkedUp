@@ -23,7 +23,7 @@ app.post("/api/v1/updateParameters", function(req, res) {
 	
 	// spawn new child process to call the python script
 	//to pass parameters to script1.py, use [‘script1.py’,’param1’,’param2’, ...] and sys.argv[1] in python script   
-	py = spawn('python', ['test.py']); //JSON.stringify(req.body)
+	py = spawn('python', ['LinkBudget.py']); //JSON.stringify(req.body)
 	// collect data from script
 	py.stdout.on('data', function (data) {
 		console.log('Pipe data from python script ...');

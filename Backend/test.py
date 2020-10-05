@@ -1,2 +1,5 @@
 print('Test Success!')
-f = open("myfile.txt", "w")
+f = open("myfile.txt", "a")
+f.write(str(sys.argv[1]))
+f.write(str(sys.argv[2])
+f.close()
