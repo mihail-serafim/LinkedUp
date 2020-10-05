@@ -75,7 +75,8 @@ class Dashboard extends React.Component {
 
     updateParameters = async() => {
         console.log('parameters button')
-        let results = await updateParametersEndpoint();
+        let results = await updateParametersEndpoint(this.state);
+        console.log(results)
         this.setState({
             linkMarginEM: results.linkMarginEM,
             linkMarginME: results.linkMarginMe,
@@ -135,7 +136,7 @@ class Dashboard extends React.Component {
                             <Message 
                                 message="" 
                                 updateMessage={(event) => console.log(event.target.value)} 
-                                submitMessage={() => console.log('sumbitted')}
+                                submitMessage={this.updateParameters}
                             />
                         </Col>
                         <Col className="mr-2 ml-2 pl-0">
@@ -174,13 +175,13 @@ var defaultFormValues = {
 // Endpoints
 async function updateParametersEndpoint(state) {
     let userJSON = state;
-    userJSON.projectID = null;
+    console.log(userJSON);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userJSON),
     };
-   
+
     const response = await fetch("/api/v1/updateParameters", requestOptions);
     let data = await response.json();
     return data;

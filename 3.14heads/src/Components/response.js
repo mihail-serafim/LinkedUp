@@ -1,5 +1,6 @@
 import React from 'react'
-import { Row, Col, Button, Card } from 'react-bootstrap';
+import { Row, Col, OverlayTrigger, Tooltip, Card } from 'react-bootstrap';
+import help from '../assets/help_green.png';
 
 function Response(props) {
     // should add some animation for changing letter or something
@@ -21,9 +22,36 @@ function Response(props) {
                     <h5>Earth to Mars</h5>
                     <Row>
                         <Col>
-                            <p><b>Link Margin:</b></p>
+                            <p><b>Link Margin:</b>
+                            <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        The <b>link margin</b> is an amalgamation of simulation parameters that represent how likely a signal is to get
+                                        through to the receiver (by taking into account disturbances, losses, imperfections, etc.). A positive link margin
+                                        means that a signal is likely to go through, while a negative link margin means that a signal is unlikely to go through.
+                                        In practice, it is typical to aim for a link margin of {">"} 3dB.
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger>
+                            </p>
                             <p>{linkMarginEM} dB</p>
-                            <p><b>Time till Received:</b></p>
+                            <p><b>Time till Received:</b>
+                            <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        This time shows how long it would take for the message to go through to the receiver
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger>
+                            </p>
                             <p>{messageTimeEM} min</p>
                         </Col>
                         <Col>

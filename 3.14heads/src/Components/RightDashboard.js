@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Col, Row, Tabs, Tab, Form, Button } from 'react-bootstrap';
-
+import { Card, Col, Row, Tabs, Tab, Form, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import help from '../assets/help_green.png';
 
 class RightDashboard extends React.Component {
 
@@ -47,6 +47,18 @@ class RightDashboard extends React.Component {
                         <Col>
                             <Form.Group controlId="Relays">
                                 <Form.Label>Relays</Form.Label>
+                                <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        <b>Relays</b> are satellites placed in space to help receive and transmit the signal
+                                        to it's ultimate destination
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger>
                                 <Form.Control as="select" 
                                 value={this.props.numberRelays} 
                                 onChange={(event) => this.props.updateNumberRelays(event.target.value)}>
@@ -64,25 +76,60 @@ class RightDashboard extends React.Component {
                         <Col>
                             <Form.Group controlId="Frequency">
                                 <Form.Label>Frequency</Form.Label>
+                                <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        <b>Frequency</b> refers to the number of cycles a wave goes through per second
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger>
                                 <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.frequency} 
-                                        onChange={(event) => this.props.updateFrequency(event.target.value)}/>Hz
+                                        onChange={(event) => this.props.updateFrequency(event.target.value)}/>GHz
                             </Form.Group>
                         </Col>
                             
                         <Col>
                             <Form.Group controlId="Bandwidth">
-                                <Form.Label>Bandwidth</Form.Label><br></br>
+                                <Form.Label>Bandwidth</Form.Label>                                
+                                <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        <b>Bandwidth</b> is the span of frequencies for which an amplifier can maintain at least
+                                        half its power - usually comes defined with the device
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger><br></br>
                                 <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                             value={this.props.bandwidth} 
-                                            onChange={(event) => this.props.updateBandwidth(event.target.value)}/>bps
+                                            onChange={(event) => this.props.updateBandwidth(event.target.value)}/>GHz
                             </Form.Group>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <Form.Group controlId="ReqBitRate">
-                                <Form.Label>Required Bit Rate</Form.Label><br></br>
+                                <Form.Label>Required Bit Rate</Form.Label>
+                                <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        The bit rate we wish to communicate at with the receiver (number of bits sent per second)
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger>
+                                <br></br>
                                 <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                             value={this.props.reqBitRate} 
                                             onChange={(event) => this.props.updateReqBitRate(event.target.value)}/>bps
@@ -91,11 +138,23 @@ class RightDashboard extends React.Component {
                         <Col>
                         </Col>
                     </Row>
-                    <b>Transmitter and Receiver</b>
+                    <b>Transmitter and Receiver Power</b>
+                    <OverlayTrigger
+                        key='top'
+                        placement='top'
+                        overlay={
+                            <Tooltip id='top'>
+                            The power at which the transmitter operates
+                            </Tooltip>
+                        }
+                        >
+                    <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                    </OverlayTrigger>
                     <Row>
                         <Col>
                             <Form.Group controlId="Power">
-                                <Form.Label>Earth Transmitter Power</Form.Label><br></br>
+                                <Form.Label>Earth Transmitter Power</Form.Label>
+                                <br></br>
                                 <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                             value={this.props.transmitterPowerE} 
                                             onChange={(event) => this.props.updateTransmitterPowerE(event.target.value)}/>W
@@ -119,7 +178,19 @@ class RightDashboard extends React.Component {
                 <Row>
                     <Col>
                         <Form.Group controlId="transmitterEffE">
-                            <Form.Label>Transmitter Efficiency</Form.Label><br></br>
+                            <Form.Label style={{width: '80%'}}>Transmitter Efficiency
+                            <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        The efficiency at which the transmitter operates
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger>
+                                </Form.Label>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.transmitterEffE} 
                                         onChange={this.props.updateText} /> %
@@ -127,7 +198,20 @@ class RightDashboard extends React.Component {
                     </Col>
                     <Col>
                         <Form.Group controlId="transmitterGainE">
-                            <Form.Label>Transmitter Gain</Form.Label><br></br>
+                            <Form.Label>Transmitter Gain
+                            <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        The <b>transmitter gain</b> represents how well a transmitter converts input power
+                                        into radio waves
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger>    
+                            </Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.transmitterGainE} 
                                         onChange={this.props.updateText}/>dB
@@ -137,7 +221,20 @@ class RightDashboard extends React.Component {
                 <Row>
                     <Col>
                         <Form.Group controlId="receiverGainE">
-                            <Form.Label>Receiver Gain</Form.Label><br></br>
+                            <Form.Label>Receiver Gain
+                            <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        The <b>receiver gain</b> represents how well a receiver converts input radio waves
+                                        into power
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                                </OverlayTrigger>
+                                </Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.receiverGainE} 
                                         onChange={this.props.updateText}/>dB
@@ -145,7 +242,20 @@ class RightDashboard extends React.Component {
                     </Col>
                     <Col>
                         <Form.Group controlId="pointingErrorE">
-                            <Form.Label>Pointing Error</Form.Label><br></br>
+                            <Form.Label>Pointing Error
+                            <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        The <b>pointing error</b> represents the angular deviation from the expected pointing location
+                                        and the actual pointing location of an antenna
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                            </OverlayTrigger>
+                            </Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.pointingErrorE} 
                                         onChange={this.props.updateText}/>º
@@ -155,7 +265,19 @@ class RightDashboard extends React.Component {
                 <Row>
                     <Col>
                         <Form.Group controlId="noiseFigureE">
-                            <Form.Label>Noise Figure</Form.Label><br></br>
+                            <Form.Label>Noise Figure
+                            <OverlayTrigger
+                                    key='top'
+                                    placement='top'
+                                    overlay={
+                                        <Tooltip id='top'>
+                                        The <b>noise figure</b> represents how noisy a receiver is due to its imperfections
+                                        </Tooltip>
+                                    }
+                                    >
+                                <img src={help} style={{ width: '25px', paddingLeft: '5px'}} />
+                            </OverlayTrigger>    
+                            </Form.Label><br></br>
                             <Form.Control type="number" placeholder={0} style={{ width: '70%', display: 'inline-block', marginRight: '5px'}}
                                         value={this.props.noiseFigureE} 
                                         onChange={this.props.updateText}/>dB

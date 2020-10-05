@@ -4,6 +4,7 @@ import getweather
 import numpy
 import sys
 from constants import *
+from skyfield.api import load
 
 class LinkBudget():
     def __init__(self, params_from_site):
@@ -12,17 +13,17 @@ class LinkBudget():
         self.location = j.get("location", "Toronto, Canada")
         weather = getweather.getweather(self.location)
 
-        self.date = j.get("date","2020-10-01").strip("-")
+        self.date = (j.get("date","2020-10-01")).split("-")
 
         self.params = {
             "time" : { # TODO - implement from json
-                "year": self.date[0],
-                "month": self.date[1],
-                "day": self.date[2]
+                "year": int(self.date[0]),
+                "month": int(self.date[1]),
+                "day": int(self.date[2])
             },
             "noise" : {
-                "e_m_rx_nf": j.get("noiseFigureE",6), #dB
-                "m_e_rx_nf": j.get("noiseFigureM",6)
+                "e_m_rx_nf": float(j.get("noiseFigureE",6)), #dB
+                "m_e_rx_nf": float(j.get("noiseFigureM",6))
             },
             "data" : {
                 "framing_data_per_packet" : 8, #bytes
@@ -46,29 +47,29 @@ class LinkBudget():
                 "clouds" : 0 #yes/no
             },
             "carrier" : {
-                "bandwidth" : j.get("frequency",0.02), #GHz 
-                "frequency" : j.get("frequency",10), #GHz(must be between 6 and 12)
+                "bandwidth" : float(j.get("frequency",0.02)), #GHz 
+                "frequency" : float(j.get("frequency",10)), #GHz(must be between 6 and 12)
                 "relays" : 2
             },
             "e_m_tx" : {
-                "tx_out_w" : j.get("transmitterPowerE",100), 
-                "efficiency" : j.get("transmitterEffE",12),
-                "tx_gain" : j.get("transmitterGainM",10) #dB
+                "tx_out_w" : float(j.get("transmitterPowerE",100)), 
+                "efficiency" : float(j.get("transmitterEffE",12)),
+                "tx_gain" : float(j.get("transmitterGainM",10)) #dB
             },
             "e_m_rx" : {
                 "eff_diameter" : 1, # OUTPUT - metres
-                "pointing_error" : j.get("pointingErrorE",0.5), #degrees
-                "rx_gain" : j.get("receiverGainE",50) #dB
+                "pointing_error" : float(j.get("pointingErrorE",0.5)), #degrees
+                "rx_gain" : float(j.get("receiverGainE",50)) #dB
             },
             "m_e_tx" : {
-                "tx_out_w" : j.get("transmitterPowerW",100), 
-                "efficiency" : j.get("transmitterEffM",12),
-                "tx_gain" : j.get("transmitterGainE", 10) #dB
+                "tx_out_w" : float(j.get("transmitterPowerW",100)), 
+                "efficiency" : float(j.get("transmitterEffM",12)),
+                "tx_gain" : float(j.get("transmitterGainE", 10)) #dB
             },
             "m_e_rx" : {
                 "eff_diameter" : 1, # OUTPUT - metres
-                "pointing_error" : j.get("pointingErrorM",0.5), #degrees
-                "rx_gain" : j.get("receiverGainM",50) #dB
+                "pointing_error" : float(j.get("pointingErrorM",0.5)), #degrees
+                "rx_gain" : float(j.get("receiverGainM",50)) #dB
             }
         }
     
@@ -83,14 +84,10 @@ class LinkBudget():
 
         return sum(pressures)/len(pressures) #average pressure, in Pa 
 
-    def dist_mars(year, month, day, hour=0, minute=0):
-        try:
-            from skyfield.api import load
-        except ModuleNotFoundError:
-            return(600)
+    def dist_mars(self, year, month, day):
         data   = load('de421.bsp')
         ts     = load.timescale()
-        t      = ts.utc(year, month, day, hour, minute) #(year,month,day,hour,minute,second)
+        t      = ts.utc(year, month, day, 0, 0) #(year,month,day,hour,minute,second)
 
         mars, earth  = data['Mars barycenter'], data['Earth']
         mpos, epos      = mars.at(t).position.km, earth.at(t).position.km
@@ -190,7 +187,6 @@ class LinkBudget():
         year = self.params["time"]["year"]
         month = self.params["time"]["month"]
         day = self.params["time"]["day"]
-        distance = self.dist_mars(year, month, day)
         frequency = self.params["carrier"]["frequency"]
         clouds = self.params["earth_air"]["clouds"]
         rain = self.params["earth_air"]["rain"]
@@ -199,7 +195,7 @@ class LinkBudget():
         pressure = self.params["earth_air"]["pressure"]
         relays = self.params["carrier"]["relays"]
 
-        distance = self.dist_mars(2000, 12, 1)
+        distance = self.dist_mars(year, month, day)
         fspl = self.fspl(distance, frequency, relays)
         #print("fspl: ",fspl)
         cloud_fade = self.cloud_fade(clouds)
@@ -277,6 +273,10 @@ try:
     lb = LinkBudget(sys.argv[1])
 except IndexError:
     lb = LinkBudget("{}")
-print("%s %s %s %s" %(lb.evaluate("e_m")))
-print("%s %s %s %s" %(lb.evaluate("m_e")))
+
+e_m = lb.evaluate("e_m")
+m_e = lb.evaluate("m_e")
+
+print("%s %s %s %s %s %s %s %s"%(e_m[0],m_e[0],e_m[1],m_e[1],e_m[2],m_e[2],e_m[3],m_e[3]))
 #print(lb.evaluate_link_margin())
+
