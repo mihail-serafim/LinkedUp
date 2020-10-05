@@ -60,6 +60,17 @@ Our backend relies on Node, Express, and Python. We used node's build-in [child 
    - For our link budget calculations, we used equations as given in NASA's "[Handbook for the estimation of microwave propagation effects](https://ntrs.nasa.gov/citations/19820004428)"
    - For planetary positional data, we used [Skyfield api](https://rhodesmill.org/skyfield/)  
 ## What's Next?
+ - Realistic orbital mechanics
+   - We'd love to have incorporated more orbital mechanics, including: Rotation of planets on their axis, orbits of planets, orbits of relays, etc.; but unfortunately it wasn't in the scope of our project given the timeframe we had to work on it
+ - Streamlined forms
+   - Input checking 
+   - Restricted values
+ - More parameters!
+   - In the spirit of the sandbox environment LinkedUp provides, we'd love to allow users even more things to tweak
+   - Custom weather
+   - Custom atmospheres
+   - Individual relay paramers
+ 
 
 
 
