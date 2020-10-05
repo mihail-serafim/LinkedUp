@@ -17,8 +17,9 @@ The view is broken into 4 major components
  ### The Results Card
   - This is where users can see the outcome of the message and parameter options.
  
- | ![frontend1.png](images/frontend1.png) | 
+ | ![frontend1.PNG](images/frontend1.PNG) | 
  |:--:| 
- | *Left: The space map   Right: The parameters dashboard* |
- 
+ | *Left: The space map&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right: The parameters dashboard* |
+ | ![frontend2.PNG](images/frontend2.PNG) |  
+ | *Left: The message card map&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right: The results card* |
 ## Back-end
