@@ -270,7 +270,11 @@ class LinkBudget():
         return(margin, bitrate_eff, time_elapsed, distance)
 
 try:
-    lb = LinkBudget(sys.argv[1])
+    with "input.json" as f:
+        json_dict = json.load(f)
+        lb = LinkBudget(json_dict)
+except FileNotFoundError:
+    lb = LinkBudget("{}")
 except IndexError:
     lb = LinkBudget("{}")
 
