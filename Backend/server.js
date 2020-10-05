@@ -30,27 +30,30 @@ app.post("/api/v1/updateParameters", async function (req, res) {
 	//to pass parameters to script1.py, use [‘script1.py’,’param1’,’param2’, ...] and sys.argv[1] in python script   
 	py = spawn('python', ['LinkBudget.py']); //JSON.stringify(req.body)
 	// collect data from script
-	fs.writeFile('input.json',JSON.stringify(req.body))
 	// in close event we are sure that stream from child process is closed
 	py.on('close', (code) => {
 	console.log(`child process close all stdio with code ${code}`);
 	});
 	
 	// process python output to JSON object
-	var vals = dataToSend.split(' ');
+	let rawdata = await fs.readFileSync('LinkBudgetOut.json');
+	let vals = JSON.parse(rawdata);
 	var obj = new Object();
 
-	obj.linkMarginEM = vals[0];
-	obj.linkMarginME = vals[1];
-	obj.effBitRateEM = vals[2];
-	obj.effBitRateME = vals[3];
-	obj.messageTimeEM = vals[4];
-	obj.messageTimeME = vals[5];
-	obj.distance = vals[6];
-	//obj.dist = vals[3];
+	console.log('here')
+
+	obj.linkMarginEM = vals.e_m.margin;
+	obj.linkMarginME = vals.m_e.margin;
+	obj.effBitRateEM = vals.e_m.bitrate_eff;
+	obj.effBitRateME = vals.m_e.bitrate_eff;
+	obj.messageTimeEM = vals.e_m.time_elapsed;
+	obj.messageTimeME = vals.m_e.time_elapsed;
+	obj.distance = vals.e_m.distance;
+
+	console.log('here2')
 
 	var jsonString = JSON.stringify(obj);
-	// send JSON object to browser {'':'',
+	console.log(jsonString)
 	
 	res.send(JSON.parse(jsonString));
 });
