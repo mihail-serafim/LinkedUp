@@ -1,10 +1,10 @@
 # LinkedUp
-Since Neil Armstrong's first step on the moon, people have wondered when will we take out first step on Mars. We believe, we will go to Mars in the coming decades.
-But what happens when we get there? How will we communicate back home? How will communicate over an average of 63 million kms?
+Since Neil Armstrong's first step on the moon, people have wondered when will we take our first step on Mars. We believe we will go to Mars in the coming decades.
+But what happens when we get there? How will we communicate back home? How will we communicate over an average of 63 million kms?
 
-LinkedUp allows us to explore this problem. It's a sandbox where people to play with different communication parameters for signals to and from Mars. 
+LinkedUp allows us to explore this problem. It's a sandbox where people can play with different communication parameters for signals to and from Mars. 
 
-LinkedUp features an intutive UI paired with live data and NASA handbooks to calculate singal transmission. Built on React and Node (Express), this project was made during the SpaceApps 2020 Hackathon.
+LinkedUp features an intutive UI paired with live data and NASA handbooks to calculate signal transmission. Built on React and Node (Express), this project was made during the SpaceApps 2020 Hackathon.
 
 ## Installation 
  - Install [NodeJS](https://nodejs.org/en/download/)
